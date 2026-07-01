@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights & Blog — Vexora Designs</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="image_logo.png">
+<style>
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root{
+  --white:#ffffff; --off:#f7f6f3; --light:#eeece8; --mid:#c8c5be;
+  --text:#1a1917; --text2:#5a5650;
+  --accent:#e8500a; --accent2:#f5a623; --alight:#fff0ea;
+  --border:#e2dfd9;
+  --shadow:0 4px 24px rgba(26,25,23,.07);
+  --shadow-lg:0 16px 64px rgba(26,25,23,.12);
+}
+
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
+#cur-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s,opacity .3s;opacity:.5;}
+body.hov #cur{width:16px;height:16px;background:var(--accent2);}
+body.hov #cur-ring{width:54px;height:54px;border-color:var(--accent2);opacity:.8;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;background:rgba(255,255,255,0);transition:background .4s,box-shadow .4s,padding .4s;}
+nav.scrolled{background:rgba(255,255,255,.92);box-shadow:0 1px 0 var(--border);backdrop-filter:blur(20px);padding:1rem 4rem;}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;letter-spacing:-.02em;color:var(--text);text-decoration:none;position:relative;}
+.logo em{color:var(--accent);font-style:normal;}
+.logo::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s;}
+.logo:hover::after{width:100%;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);text-decoration:none;position:relative;transition:color .2s;}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s;}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active{color:var(--accent);}
+.nav-links a.active::after{width:100%;}
+.nav-cta{font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--text);color:var(--white);border:none;padding:.7rem 1.5rem;cursor:pointer;position:relative;overflow:hidden;transition:color .3s;}
+.nav-cta::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.nav-cta:hover::before{transform:translateX(0);}
+.nav-cta span{position:relative;z-index:1;}
+
+/* HERO */
+#hero{min-height:52vh;padding:10rem 4rem 4.5rem;background:var(--off);position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,var(--mid) 1px,transparent 1px);background-size:32px 32px;opacity:.3;pointer-events:none;}
+.hblob1{position:absolute;width:440px;height:440px;background:radial-gradient(circle,rgba(232,80,10,.09) 0%,transparent 70%);border-radius:50%;top:-80px;right:-60px;filter:blur(60px);animation:bf 10s ease-in-out infinite;}
+.hblob2{position:absolute;width:260px;height:260px;background:radial-gradient(circle,rgba(245,166,35,.07) 0%,transparent 70%);border-radius:50%;bottom:40px;left:33%;filter:blur(50px);animation:bf 14s ease-in-out 3s infinite;}
+@keyframes bf{0%,100%{transform:translate(0,0)}50%{transform:translate(16px,-18px)}}
+
+.hero-inner{position:relative;z-index:1;max-width:900px;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem;opacity:0;transform:translateY(14px);animation:fUp .6s ease forwards .3s;}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{color:var(--mid);}
+@keyframes fUp{to{opacity:1;transform:translateY(0);}}
+
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:900;line-height:1;letter-spacing:-.03em;color:var(--text);margin-bottom:1.5rem;}
+.hero-title .line{display:block;overflow:hidden;}
+.hero-title .line span{display:block;opacity:0;transform:translateY(100%);animation:lUp .8s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-title .line:nth-child(1) span{animation-delay:.4s;}
+.hero-title .line:nth-child(2) span{animation-delay:.55s;}
+.hero-title em{color:var(--accent);font-style:italic;}
+@keyframes lUp{to{opacity:1;transform:translateY(0);}}
+
+.hero-sub{font-size:1rem;color:var(--text2);font-weight:300;max-width:520px;line-height:1.8;opacity:0;animation:fUp .7s ease forwards .9s;}
+
+/* TICKER */
+.ticker{background:var(--text);padding:.7rem 0;overflow:hidden;white-space:nowrap;}
+.ticker-in{display:inline-flex;animation:tickr 26s linear infinite;}
+.ticker:hover .ticker-in{animation-play-state:paused;}
+.ticker-in span{font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:0 2rem;transition:color .2s;}
+.ticker-in span:hover{color:var(--accent2);}
+.ticker-in .dot{color:var(--accent);padding:0;font-size:.7rem;}
+@keyframes tickr{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* COMMONS */
+.sec-tag{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;}
+.sec-tag::before{content:'';width:20px;height:1px;background:var(--accent);}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:var(--text);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.reveal.rl{transform:translateX(-36px);}
+.reveal.rr{transform:translateX(36px);}
+.reveal.vis{opacity:1;transform:none;}
+
+.posts-grid .post-card:nth-child(1){transition-delay:0s;}
+.posts-grid .post-card:nth-child(2){transition-delay:.08s;}
+.posts-grid .post-card:nth-child(3){transition-delay:.16s;}
+.posts-grid .post-card:nth-child(4){transition-delay:.04s;}
+.posts-grid .post-card:nth-child(5){transition-delay:.12s;}
+.posts-grid .post-card:nth-child(6){transition-delay:.2s;}
+.posts-grid .post-card:nth-child(7){transition-delay:.06s;}
+.posts-grid .post-card:nth-child(8){transition-delay:.14s;}
+.posts-grid .post-card:nth-child(9){transition-delay:.22s;}
+.topics-grid .topic-card:nth-child(1){transition-delay:0s;}
+.topics-grid .topic-card:nth-child(2){transition-delay:.08s;}
+.topics-grid .topic-card:nth-child(3){transition-delay:.16s;}
+.topics-grid .topic-card:nth-child(4){transition-delay:.24s;}
+.topics-grid .topic-card:nth-child(5){transition-delay:.08s;}
+.topics-grid .topic-card:nth-child(6){transition-delay:.16s;}
+.topics-grid .topic-card:nth-child(7){transition-delay:.24s;}
+.topics-grid .topic-card:nth-child(8){transition-delay:.32s;}
+
+/* FILTER BAR */
+#blog{padding:5rem 4rem 3rem;}
+.filter-row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:3rem;}
+.filter-pills{display:flex;gap:.5rem;flex-wrap:wrap;}
+.pill{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:.45rem 1.1rem;border-radius:100px;border:1.5px solid var(--border);color:var(--text2);background:var(--white);cursor:pointer;transition:color .2s,background .2s,border-color .2s,transform .15s;}
+.pill:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px);}
+.pill.active{background:var(--text);color:var(--white);border-color:var(--text);}
+.search-wrap{position:relative;}
+.search-wrap input{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--text);background:var(--off);border:1.5px solid var(--border);border-radius:8px;padding:.6rem 1rem .6rem 2.4rem;outline:none;width:220px;transition:border-color .3s,box-shadow .3s;}
+.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,80,10,.08);}
+.search-wrap input::placeholder{color:var(--mid);}
+.search-icon{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);font-size:.85rem;color:var(--mid);pointer-events:none;}
+
+/* FEATURED POST */
+.featured-post{display:grid;grid-template-columns:1.2fr 1fr;gap:0;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-lg);margin-bottom:4rem;transition:box-shadow .35s,transform .35s;cursor:pointer;}
+.featured-post:hover{box-shadow:0 24px 80px rgba(26,25,23,.14);transform:translateY(-4px);}
+.feat-img{background:linear-gradient(135deg,#fdf0e8 0%,#fce3d0 40%,#f9c9a8 100%);display:flex;align-items:center;justify-content:center;min-height:340px;position:relative;overflow:hidden;}
+.feat-img-inner{text-align:center;}
+.feat-icon{font-size:5rem;display:block;margin-bottom:.5rem;line-height:1;}
+.feat-img-label{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:rgba(232,80,10,.4);letter-spacing:-.02em;}
+.feat-img::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(232,80,10,.06) 1px,transparent 1px);background-size:24px 24px;}
+.feat-content{padding:3rem;display:flex;flex-direction:column;justify-content:center;background:var(--white);}
+.feat-meta{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.feat-cat{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--accent);padding:.25rem .7rem;border-radius:100px;}
+.feat-badge{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--alight);border:1px solid rgba(232,80,10,.2);padding:.25rem .7rem;border-radius:100px;}
+.feat-date{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.06em;color:var(--mid);}
+.feat-title{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;letter-spacing:-.03em;line-height:1.1;color:var(--text);margin-bottom:1rem;}
+.feat-excerpt{font-size:.92rem;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:1.8rem;}
+.feat-author{display:flex;align-items:center;gap:.8rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.85rem;font-weight:700;flex-shrink:0;}
+.av-orange{background:var(--alight);color:var(--accent);}
+.av-teal{background:#e1f5ee;color:#0f6e56;}
+.av-blue{background:#e6f1fb;color:#185fa5;}
+.av-purple{background:#eeedfe;color:#534ab7;}
+.av-pink{background:#fbeaf0;color:#993556;}
+.author-name{font-size:.85rem;font-weight:500;color:var(--text);}
+.author-role{font-size:.75rem;color:var(--text2);font-weight:300;}
+.read-link{display:inline-flex;align-items:center;gap:.4rem;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;transition:gap .25s;}
+.read-link:hover{gap:.7rem;}
+
+/* POSTS GRID */
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.post-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s;cursor:pointer;display:flex;flex-direction:column;}
+.post-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(232,80,10,.2);}
+.post-thumb{height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden;}
+.post-thumb::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.3) 1px,transparent 1px);background-size:20px 20px;}
+.pt1{background:linear-gradient(135deg,#e8edf5,#c4d4ec);}
+.pt2{background:linear-gradient(135deg,#f0f5e8,#c8dfa8);}
+.pt3{background:linear-gradient(135deg,#f5e8f5,#dbacd8);}
+.pt4{background:linear-gradient(135deg,#e8f5f0,#a8dfc8);}
+.pt5{background:linear-gradient(135deg,#f5f0e8,#e0d0b0);}
+.pt6{background:linear-gradient(135deg,#fce8e8,#f0b0b0);}
+.post-body{padding:1.6rem;flex:1;display:flex;flex-direction:column;}
+.post-meta{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;flex-wrap:wrap;}
+.pcat{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--alight);border:1px solid rgba(232,80,10,.15);padding:.2rem .55rem;border-radius:100px;}
+.pdate{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.06em;color:var(--mid);}
+.pread{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.06em;color:var(--mid);margin-left:auto;}
+.post-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:.7rem;}
+.post-excerpt{font-size:.83rem;color:var(--text2);font-weight:300;line-height:1.7;flex:1;margin-bottom:1.2rem;}
+.post-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--border);}
+.post-av{display:flex;align-items:center;gap:.5rem;}
+.post-av .av{width:28px;height:28px;font-size:.7rem;}
+.post-av-name{font-size:.78rem;font-weight:500;color:var(--text2);}
+
+/* NEWSLETTER */
+#newsletter{background:var(--text);padding:5rem 4rem;}
+.nl-inner{max-width:580px;margin:0 auto;text-align:center;}
+.nl-tag{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.8rem;display:flex;align-items:center;justify-content:center;gap:.6rem;}
+.nl-tag::before{content:'';width:20px;height:1px;background:rgba(255,255,255,.35);}
+.nl-tag::after{content:'';width:20px;height:1px;background:rgba(255,255,255,.35);}
+.nl-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;color:var(--white);margin-bottom:1rem;}
+.nl-title em{color:var(--accent2);font-style:italic;}
+.nl-sub{font-size:.92rem;color:rgba(255,255,255,.45);font-weight:300;line-height:1.8;margin-bottom:2.5rem;}
+.nl-form{display:flex;gap:.6rem;max-width:440px;margin:0 auto;}
+.nl-form input{flex:1;font-family:'Outfit',sans-serif;font-size:.9rem;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:var(--white);padding:.85rem 1.1rem;border-radius:8px;outline:none;transition:border-color .3s,background .3s;}
+.nl-form input::placeholder{color:rgba(255,255,255,.3);}
+.nl-form input:focus{border-color:var(--accent);background:rgba(255,255,255,.1);}
+.nl-btn{font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--accent);color:var(--white);border:none;padding:.85rem 1.6rem;border-radius:8px;cursor:pointer;white-space:nowrap;position:relative;overflow:hidden;transition:transform .2s;}
+.nl-btn::before{content:'';position:absolute;inset:0;background:var(--accent2);transform:translateX(-101%);transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.nl-btn:hover::before{transform:translateX(0);}
+.nl-btn:active{transform:scale(.97);}
+.nl-btn span{position:relative;z-index:1;color:var(--text);}
+.nl-note{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.06em;color:rgba(255,255,255,.2);margin-top:1.2rem;}
+.nl-ok{display:none;color:#86efac;font-family:'DM Mono',monospace;font-size:.78rem;letter-spacing:.06em;margin-top:1rem;animation:fUp .4s ease;}
+
+/* TOPICS CLOUD */
+#topics{background:var(--off);padding:5rem 4rem;}
+.topics-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;gap:2rem;flex-wrap:wrap;}
+.topics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.topic-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.8rem 1.5rem;text-align:center;cursor:pointer;transition:border-color .3s,box-shadow .3s,transform .3s;}
+.topic-card:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-4px);}
+.topic-icon{font-size:2rem;display:block;margin-bottom:.8rem;}
+.topic-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;letter-spacing:-.02em;color:var(--text);margin-bottom:.3rem;}
+.topic-count{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);}
+
+/* CTA */
+#cta{background:var(--white);padding:5.5rem 4rem;text-align:center;border-top:1px solid var(--border);}
+.cta-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--alight);color:var(--accent);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.4rem 1rem;border-radius:100px;margin-bottom:2rem;}
+.cta-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;color:var(--text);margin-bottom:1rem;}
+.cta-title em{color:var(--accent);font-style:italic;}
+.cta-sub{font-size:.95rem;color:var(--text2);font-weight:300;line-height:1.8;max-width:460px;margin:0 auto 2.5rem;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--text);color:var(--white);padding:.9rem 2rem;text-decoration:none;border-radius:8px;position:relative;overflow:hidden;transition:color .3s;cursor:pointer;border:none;}
+.btn-primary::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.btn-primary:hover::before{transform:translateX(0);}
+.btn-primary span,.btn-primary svg{position:relative;z-index:1;}
+.btn-primary svg{width:16px;height:16px;transition:transform .3s;}
+.btn-primary:hover svg{transform:translateX(4px);}
+.btn-outline{display:inline-flex;align-items:center;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text);padding:.9rem 2rem;text-decoration:none;border-radius:8px;border:1.5px solid var(--border);position:relative;overflow:hidden;transition:color .3s,border-color .3s;cursor:pointer;}
+.btn-outline::before{content:'';position:absolute;inset:0;background:var(--text);transform:translateY(101%);transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.btn-outline:hover{color:var(--white);border-color:var(--text);}
+.btn-outline:hover::before{transform:translateY(0);}
+.btn-outline span{position:relative;z-index:1;}
+
+/* FOOTER */
+footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.flogo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--white);}
+.flogo em{color:var(--accent);font-style:normal;}
+.fcopy{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:rgba(255,255,255,.3);}
+.fsoc{display:flex;gap:.7rem;}
+.sbtn{width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:.75rem;color:rgba(255,255,255,.35);cursor:pointer;text-decoration:none;transition:border-color .3s,color .3s,background .3s,transform .3s;}
+.sbtn:hover{border-color:var(--accent);color:var(--white);background:var(--accent);transform:translateY(-4px);}
+
+/* NO RESULTS */
+.no-results{display:none;text-align:center;padding:4rem 2rem;grid-column:1/-1;}
+.no-results p{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--mid);margin-bottom:.5rem;}
+.no-results span{font-size:.9rem;color:var(--text2);font-weight:300;}
+
+@media(max-width:960px){
+  nav{padding:1.2rem 1.5rem;}
+  .nav-links{display:none;}
+  #blog,#newsletter,#topics,#cta{padding:4rem 1.5rem;}
+  #hero{padding:8rem 1.5rem 4rem;}
+  .featured-post{grid-template-columns:1fr;}
+  .feat-img{min-height:200px;}
+  .posts-grid{grid-template-columns:1fr 1fr;}
+  .topics-grid{grid-template-columns:repeat(2,1fr);}
+  .nl-form{flex-direction:column;}
+  .topics-hdr{flex-direction:column;align-items:flex-start;}
+  body{cursor:default;}
+  #cur,#cur-ring{display:none;}
+}
+@media(max-width:600px){
+  .posts-grid{grid-template-columns:1fr;}
+  .filter-row{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:640px){
+  body{font-size:15px;}
+  nav{padding:.75rem 1rem;}
+  nav.scrolled{padding:.65rem 1rem;}
+  .logo{font-size:1.05rem;}
+  .nav-cta{padding:.65rem .85rem;font-size:.68rem;}
+  #blog,#newsletter,#topics,#cta{padding:3.5rem 1rem;}
+  #hero{padding:7.5rem 1rem 3rem;min-height:auto;}
+  .hblob1{width:220px;height:220px;}
+  .hblob2{width:150px;height:150px;}
+  .breadcrumb{font-size:.66rem;margin-bottom:1.1rem;}
+  .hero-title{font-size:clamp(2.2rem,11vw,3rem);margin-bottom:1.1rem;}
+  .hero-sub{font-size:.92rem;line-height:1.7;}
+  .ticker-in span{font-size:.72rem;padding:0 1.1rem;}
+  .sec-title{font-size:clamp(1.8rem,9vw,2.4rem);}
+  .filter-pills{gap:.4rem;}
+  .pill{font-size:.64rem;padding:.4rem .9rem;}
+  .search-wrap input{width:100%;}
+  .search-wrap{width:100%;}
+  .featured-post{border-radius:14px;margin-bottom:2.5rem;}
+  .feat-img{min-height:160px;}
+  .feat-icon{font-size:3.2rem;}
+  .feat-content{padding:1.6rem;}
+  .feat-title{font-size:1.4rem;}
+  .feat-excerpt{font-size:.85rem;line-height:1.7;margin-bottom:1.2rem;}
+  .feat-meta{gap:.6rem;margin-bottom:1rem;flex-wrap:wrap;}
+  .post-body{padding:1.2rem;}
+  .post-thumb{height:140px;font-size:2.2rem;}
+  .post-title{font-size:1rem;}
+  .post-excerpt{font-size:.8rem;}
+  .nl-title{font-size:clamp(1.6rem,8vw,2.2rem);}
+  .nl-sub{font-size:.85rem;}
+  .nl-form{flex-direction:column;}
+  .nl-btn{width:100%;justify-content:center;}
+  .topics-grid{grid-template-columns:1fr 1fr;gap:.75rem;}
+  .topic-card{padding:1.3rem 1rem;}
+  .cta-title{font-size:clamp(1.7rem,8vw,2.4rem);}
+  .cta-sub{font-size:.88rem;}
+  .cta-btns{display:grid;grid-template-columns:1fr;gap:.75rem;}
+  .cta-btns .btn-primary,.cta-btns .btn-outline{width:100%;justify-content:center;}
+  footer{padding:2rem 1rem;flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:380px){
+  .logo{font-size:.98rem;}
+  .logo img{width:32px;height:32px;}
+  .hero-title{font-size:clamp(2rem,12vw,2.6rem);}
+  .topics-grid{grid-template-columns:1fr;}
+}
+.logo,.flogo{display:inline-flex;align-items:center;gap:.55rem;}
+.logo img,.flogo img{width:44px;height:44px;border-radius:9px;object-fit:cover;box-shadow:0 6px 18px rgba(232,80,10,.18);flex:0 0 auto;}
+.flogo img{width:38px;height:38px;}
+.logo span,.flogo span{display:inline-block;}
+
+/* ── MOBILE MENU ── */
+.nav-toggle{display:none;}
+@media(max-width:960px){
+  .nav-toggle{
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    gap:5px;width:38px;height:38px;background:none;border:none;cursor:pointer;
+    z-index:201;flex:0 0 auto;order:3;
+  }
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s ease,opacity .3s ease;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .nav-links{
+    display:flex;position:fixed;top:0;right:0;height:100vh;height:100dvh;width:78%;max-width:320px;
+    background:var(--white);flex-direction:column;align-items:flex-start;
+    padding:6.5rem 2rem 2rem;gap:0;box-shadow:-8px 0 40px rgba(26,25,23,.18);
+    transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);
+    z-index:200;overflow-y:auto;
+  }
+  .nav-links.open{transform:translateX(0);}
+  .nav-links li{width:100%;border-bottom:1px solid var(--border);}
+  .nav-links a{display:block;padding:1rem 0;font-size:.95rem;}
+  .nav-links a::after{display:none;}
+
+  .nav-overlay{
+    display:none;position:fixed;inset:0;background:rgba(26,25,23,.45);
+    z-index:150;opacity:0;transition:opacity .3s ease;
+  }
+  .nav-overlay.open{display:block;opacity:1;}
+  body.menu-open{overflow:hidden;}
+  .nav-back{order:2;}
+}
+
+
+/* Mobile layout hardening */
+@media(max-width:960px){
+  html,
+  body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+  body{position:relative;}
+  body > *,
+  main,
+  section,
+  footer,
+  #hero,
+  .ticker{
+    max-width:100%;
+    overflow-x:clip;
+  }
+  img,
+  svg,
+  video,
+  canvas{max-width:100%;}
+  nav,
+  nav.scrolled{
+    min-height:64px;
+    padding:.75rem 1rem;
+    gap:.75rem;
+    z-index:10000;
+    background:rgba(255,255,255,.96);
+    box-shadow:0 1px 0 var(--border);
+    backdrop-filter:blur(18px);
+  }
+  .logo{min-width:0;flex:1;overflow:hidden;}
+  .logo span{line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  nav .nav-cta,
+  nav .nav-back{display:none;}
+  .nav-links{z-index:10001;}
+  .nav-toggle{z-index:10002;margin-left:auto;}
+  .nav-overlay{z-index:9999;}
+  .hero-title,
+  .sec-title,
+  .cta-title{
+    max-width:100%;
+    overflow-wrap:break-word;
+    word-break:normal;
+  }
+  .hero-title{font-size:clamp(2rem,10.5vw,2.85rem)!important;}
+  .hero-title .line,
+  .hero-title .line span{max-width:100%;}
+  .reveal.rl,
+  .reveal.rr{transform:translateY(40px);}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="logo"><img src="image_logo.png" alt="Vexora Designs logo"><span>Vexora <em>Designs</em></span></a>
+  <ul id="navLinks" class="nav-links" aria-label="Main navigation">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="blog.html" class="active">Insights</a></li>
+    <li><a href="order.html">Order</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+  <button class="nav-cta"><span>Get a Quote</span></button>
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-dots"></div>
+  <div class="hblob1" id="b1"></div>
+  <div class="hblob2" id="b2"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span> Insights</div>
+    <h1 class="hero-title">
+      <div class="line"><span>Design thinking,</span></div>
+      <div class="line"><span>straight from <em>the studio.</em></span></div>
+    </h1>
+    <p class="hero-sub">Tips, trends, and behind-the-scenes stories from our team of 5. Learn what makes brands actually work — and what doesn't.</p>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-in">
+    <span>Branding Tips</span><span class="dot"> ✦ </span>
+    <span>Design Trends</span><span class="dot"> ✦ </span>
+    <span>Client Stories</span><span class="dot"> ✦ </span>
+    <span>Social Media</span><span class="dot"> ✦ </span>
+    <span>Typography</span><span class="dot"> ✦ </span>
+    <span>Color Theory</span><span class="dot"> ✦ </span>
+    <span>Studio Life</span><span class="dot"> ✦ </span>
+    <span>Branding Tips</span><span class="dot"> ✦ </span>
+    <span>Design Trends</span><span class="dot"> ✦ </span>
+    <span>Client Stories</span><span class="dot"> ✦ </span>
+    <span>Social Media</span><span class="dot"> ✦ </span>
+    <span>Typography</span><span class="dot"> ✦ </span>
+    <span>Color Theory</span><span class="dot"> ✦ </span>
+    <span>Studio Life</span><span class="dot"> ✦ </span>
+  </div>
+</div>
+
+<!-- BLOG -->
+<section id="blog">
+
+  <!-- Filter Bar -->
+  <div class="filter-row reveal">
+    <div class="filter-pills" id="filters">
+      <button class="pill active" data-cat="all">All Posts</button>
+      <button class="pill" data-cat="branding">Branding</button>
+      <button class="pill" data-cat="social">Social Media</button>
+      <button class="pill" data-cat="print">Print</button>
+      <button class="pill" data-cat="web">Web & UI</button>
+      <button class="pill" data-cat="trends">Trends</button>
+      <button class="pill" data-cat="studio">Studio Life</button>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search articles…">
+    </div>
+  </div>
+
+  <!-- Featured Post -->
+  <div class="featured-post reveal" id="featuredPost">
+    <div class="feat-img">
+      <div class="feat-img-inner">
+        <span class="feat-icon">⬡</span>
+        <div class="feat-img-label">Logo Design</div>
+      </div>
+    </div>
+    <div class="feat-content">
+      <div class="feat-meta">
+        <span class="feat-cat">Branding</span>
+        <span class="feat-badge">Featured</span>
+        <span class="feat-date">May 10, 2025</span>
+      </div>
+      <h2 class="feat-title">Why 90% of Logo Redesigns Fail — And How to Get Yours Right</h2>
+      <p class="feat-excerpt">After designing over 300 logos across 6 years, we've spotted the same mistakes over and over. Clients change agencies, spend more money, and still end up with something they don't love. Here's what actually separates a great logo from an expensive mistake.</p>
+      <div class="feat-author">
+        <div class="av av-orange">KA</div>
+        <div>
+          <div class="author-name">Khalid Al-Amin</div>
+          <div class="author-role">Creative Director · 8 min read</div>
+        </div>
+        <a href="#" class="read-link" style="margin-left:auto">Read article <span>→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Posts Grid -->
+  <div class="posts-grid" id="postsGrid">
+
+    <div class="post-card reveal" data-cat="social" data-title="5 social media design mistakes that are hurting your engagement">
+      <div class="post-thumb pt1">◈</div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="pcat">Social Media</span>
+          <span class="pdate">Apr 28, 2025</span>
+          <span class="pread">6 min</span>
+        </div>
+        <div class="post-title">5 Social Media Design Mistakes That Are Hurting Your Engagement</div>
+        <p class="post-excerpt">Your content calendar is full but the numbers aren't moving. Here are the design errors we see every week — and how to fix them in under an hour.</p>
+        <div class="post-footer">
+          <div class="post-av"><div class="av av-teal">OI</div><span class="post-av-name">Omar Idris</span></div>
+          <a href="#" class="read-link">Read <span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card reveal" data-cat="branding" data-title="the psychology of color in brand identity">
+      <div class="post-thumb pt2">🎨</div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="pcat">Branding</span>
+          <span class="pdate">Apr 14, 2025</span>
+          <span class="pread">9 min</span>
+        </div>
+        <div class="post-title">The Psychology of Colour in Brand Identity</div>
+        <p class="post-excerpt">Colour isn't decoration — it's communication. We break down how brands like Coca-Cola, Spotify, and Rolex use colour to trigger specific emotions and why it matters for your business too.</p>
+        <div class="post-footer">
+          <div class="post-av"><div class="av av-orange">SA</div><span class="post-av-name">Sara Ahmed</span></div>
+          <a href="#" class="read-link">Read <span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card reveal" data-cat="web" data-title="why your website mockup keeps getting rejected by developers">
+      <div class="post-thumb pt3">⬚</div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="pcat">Web & UI</span>
+          <span class="pdate">Mar 30, 2025</span>
+          <span class="pread">7 min</span>
+        </div>
+        <div class="post-title">Why Your Website Mockup Keeps Getting Rejected by Developers</div>
+        <p class="post-excerpt">Designers and developers speak different languages. Here's what every UI designer needs to know about handing off files that actually get built correctly — the first time.</p>
+        <div class="post-footer">
+          <div class="post-av"><div class="av av-blue">LM</div><span class="post-av-name">Layla Malik</span></div>
+          <a href="#" class="read-link">Read <span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card reveal" data-cat="print" data-title="business card design rules you should never break">
+      <div class="post-thumb pt4">▣</div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="pcat">Print</span>
+          <span class="pdate">Mar 15, 2025</span>
+          <span class="pread">5 min</span>
+        </div>
+        <div class="post-title">Business Card Design Rules You Should Never Break</div>
+        <p class="post-excerpt">In a world of digital everything, a well-designed business card still makes a lasting impression. But get it wrong and it ends up in the bin. Here's what we've learned from thousands of prints.</p>
+        <div class="post-footer">
+          <div class="post-av"><div class="av av-orange">SA</div><span class="post-av-name">Sara Ahmed</span></div>
+          <a href="#" class="read-link">Read <span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card reveal" data-cat="trends" data-title="graphic design trends dominating 2025">
+      <div class="post-thumb pt5">✦</div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="pcat">Trends</span>
+          <span class="pdate">Mar 3, 2025</span>
+          <span class="pread">10 min</span>
+        </div>
+        <div class="post-title">Graphic Design Trends Dominating 2025</div>
+        <p class="post-excerpt">From anti-design to tactile textures and AI-assisted workflows — we break down the trends actually worth paying attention to, and the ones that'll age badly by next year.</p>
+        <div class="post-footer">
+          <div class="post-av"><div class="av av-orange">KA</div><span class="post-av-name">Khalid Al-Amin</span></div>
+          <a href="#" class="read-link">Read <span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card reveal" data-cat="studio" data-title="how our team of 5 manages 20 client projects at once">
+      <div class="post-thumb pt6">🏠</div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="pcat">Studio Life</span>
+          <span class="pdate">Feb 18, 2025</span>
+          <span class="pread">6 min</span>
+        </div>
+        <div class="post-title">How Our Team of 5 Manages 20 Client Projects at Once</div>
+        <p class="post-excerpt">Behind every on-time delivery is a solid system. We share the exact workflow, tools, and communication rules that keep Vexora Designs running without chaos.</p>
+        <div class="post-footer">
+          <div class="post-av"><div class="av av-orange">KA</div><span class="post-av-name">Khalid Al-Amin</span></div>
+          <a href="#" class="read-link">Read <span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card reveal" data-cat="branding" data-title="how to brief a designer without wasting money">
+      <div class="post-thumb pt2">📋</div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="pcat">Branding</span>
+          <span class="pdate">Feb 5, 2025</span>
+          <span class="pread">7 min</span>
+        </div>
+        <div class="post-title">How to Brief a Designer Without Wasting Money</div>
+        <p class="post-excerpt">Vague briefs lead to wasted revisions and frustrated both sides. Here's the exact information your designer needs before they start — and how to communicate your vision clearly.</p>
+        <div class="post-footer">
+          <div class="post-av"><div class="av av-purple">LM</div><span class="post-av-name">Layla Malik</span></div>
+          <a href="#" class="read-link">Read <span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card reveal" data-cat="social" data-title="instagram vs tiktok which platform should your brand prioritise">
+      <div class="post-thumb pt1">📱</div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="pcat">Social Media</span>
+          <span class="pdate">Jan 22, 2025</span>
+          <span class="pread">8 min</span>
+        </div>
+        <div class="post-title">Instagram vs TikTok: Which Platform Should Your Brand Prioritise?</div>
+        <p class="post-excerpt">Both platforms can explode your brand's reach — but they reward completely different content styles and design approaches. Here's how to decide which one deserves your budget.</p>
+        <div class="post-footer">
+          <div class="post-av"><div class="av av-teal">OI</div><span class="post-av-name">Omar Idris</span></div>
+          <a href="#" class="read-link">Read <span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card reveal" data-cat="trends" data-title="typography trends that will define brand identity in 2025 and beyond">
+      <div class="post-thumb pt3">Aa</div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="pcat">Trends</span>
+          <span class="pdate">Jan 8, 2025</span>
+          <span class="pread">8 min</span>
+        </div>
+        <div class="post-title">Typography Trends That Will Define Brand Identity in 2025</div>
+        <p class="post-excerpt">Variable fonts, oversized display type, and the return of serif — typography is having a moment. Here's what forward-thinking brands are doing with type right now.</p>
+        <div class="post-footer">
+          <div class="post-av"><div class="av av-orange">SA</div><span class="post-av-name">Sara Ahmed</span></div>
+          <a href="#" class="read-link">Read <span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-results" id="noResults">
+      <p>No articles found</p>
+      <span>Try a different search or category</span>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="newsletter">
+  <div class="nl-inner reveal">
+    <div class="nl-tag">Stay in the loop</div>
+    <h2 class="nl-title">Design tips, <em>straight to your inbox.</em></h2>
+    <p class="nl-sub">One email per week. No spam. Just genuinely useful design advice from our team — covering branding, social media, print, and web.</p>
+    <div class="nl-form">
+      <input type="email" id="nlEmail" placeholder="your@email.com">
+      <button class="nl-btn"><span>Subscribe</span></button>
+    </div>
+    <div class="nl-note">Join 1,200+ designers & business owners. Unsubscribe anytime.</div>
+    <div class="nl-ok" id="nlOk">✓ You're in! Welcome to the Vexora Designs community.</div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section id="topics">
+  <div class="topics-hdr">
+    <div class="reveal">
+      <div class="sec-tag">Browse by Topic</div>
+      <h2 class="sec-title">What We Write About</h2>
+    </div>
+  </div>
+  <div class="topics-grid">
+    <div class="topic-card reveal" data-cat="branding">
+      <span class="topic-icon">⬡</span>
+      <div class="topic-name">Branding</div>
+      <div class="topic-count">3 Articles</div>
+    </div>
+    <div class="topic-card reveal" data-cat="social">
+      <span class="topic-icon">◈</span>
+      <div class="topic-name">Social Media</div>
+      <div class="topic-count">2 Articles</div>
+    </div>
+    <div class="topic-card reveal" data-cat="print">
+      <span class="topic-icon">▣</span>
+      <div class="topic-name">Print</div>
+      <div class="topic-count">1 Article</div>
+    </div>
+    <div class="topic-card reveal" data-cat="web">
+      <span class="topic-icon">⬚</span>
+      <div class="topic-name">Web & UI</div>
+      <div class="topic-count">1 Article</div>
+    </div>
+    <div class="topic-card reveal" data-cat="trends">
+      <span class="topic-icon">✦</span>
+      <div class="topic-name">Trends</div>
+      <div class="topic-count">2 Articles</div>
+    </div>
+    <div class="topic-card reveal" data-cat="studio">
+      <span class="topic-icon">🏠</span>
+      <div class="topic-name">Studio Life</div>
+      <div class="topic-count">1 Article</div>
+    </div>
+    <div class="topic-card reveal" data-cat="all">
+      <span class="topic-icon">📚</span>
+      <div class="topic-name">All Articles</div>
+      <div class="topic-count">10 Articles</div>
+    </div>
+    <div class="topic-card reveal topic-action" data-href="order.html">
+      <span class="topic-icon">💌</span>
+      <div class="topic-name">Write for Us</div>
+      <div class="topic-count">Get in touch</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="reveal">
+    <div class="cta-badge">Work with us</div>
+    <h2 class="cta-title">Liked what you read? Let's <em>make something.</em></h2>
+    <p class="cta-sub">Turn inspiration into action. Get in touch and we'll have a proposal in your inbox within 24 hours.</p>
+    <div class="cta-btns">
+      <a href="order.html" class="btn-primary">
+        <span>Start a Project</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="services.html" class="btn-outline"><span>See Our Services</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo"><img src="image_logo.png" alt="Vexora Designs Logo"><span>Vexora <em>Designs</em></span></div>
+  <div class="fcopy">© 2025 Vexora Designs. Quetta, Pakistan.</div>
+  <div class="fsoc">
+    <a class="sbtn" href="#" title="Instagram">ig</a>
+    <a class="sbtn" href="#" title="Behance">be</a>
+    <a class="sbtn" href="#" title="WhatsApp">wa</a>
+    <a class="sbtn" href="#" title="LinkedIn">in</a>
+  </div>
+</footer>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+!function aR(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(aR);}();
+document.querySelectorAll('a,button,.post-card,.topic-card,.featured-post,.pill').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+
+/* NAV SCROLL */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+
+/* PARALLAX BLOBS */
+document.addEventListener('mousemove',e=>{
+  const xr=(e.clientX/innerWidth-.5)*20,yr=(e.clientY/innerHeight-.5)*20;
+  const b1=document.getElementById('b1'),b2=document.getElementById('b2');
+  if(b1)b1.style.transform=`translate(${xr}px,${yr}px)`;
+  if(b2)b2.style.transform=`translate(${-xr*.6}px,${-yr*.6}px)`;
+});
+
+/* SCROLL REVEAL */
+const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* FILTER + SEARCH */
+let activeCat='all', searchQ='';
+
+function filterBycat(cat){
+  activeCat=cat;
+  document.querySelectorAll('.pill').forEach(p=>{
+    p.classList.toggle('active', p.dataset.cat===cat);
+  });
+  applyFilter();
+  document.getElementById('blog').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>filterBycat(p.dataset.cat)));
+
+document.getElementById('searchInput').addEventListener('input',e=>{
+  searchQ=e.target.value.toLowerCase().trim();
+  applyFilter();
+});
+
+function applyFilter(){
+  const cards=[...document.querySelectorAll('.post-card')];
+  let visible=0;
+  cards.forEach(c=>{
+    const catOk=activeCat==='all'||c.dataset.cat===activeCat;
+    const searchOk=!searchQ||c.dataset.title.includes(searchQ)||(c.querySelector('.post-title').textContent.toLowerCase().includes(searchQ));
+    const show=catOk&&searchOk;
+    c.style.display=show?'flex':'none';
+    if(show)visible++;
+  });
+  document.getElementById('noResults').style.display=visible===0?'block':'none';
+  /* hide featured when search active */
+  document.getElementById('featuredPost').style.display=searchQ?'none':'grid';
+}
+
+/* MAGNETIC BUTTONS */
+document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta,.nl-btn').forEach(b=>{
+  b.addEventListener('mousemove',e=>{
+    const r=b.getBoundingClientRect();
+    b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.2}px)`;
+  });
+  b.addEventListener('mouseleave',()=>b.style.transform='');
+});
+
+/* CARD TILT */
+document.querySelectorAll('.post-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`perspective(700px) rotateY(${x*5}deg) rotateX(${-y*5}deg) translateY(-6px)`;
+  });
+  c.addEventListener('mouseleave',()=>c.style.transform='');
+});
+
+/* NEWSLETTER */
+function doSubscribe(){
+  const email=document.getElementById('nlEmail').value.trim();
+  if(!email||!email.includes('@'))return;
+  document.getElementById('nlOk').style.display='block';
+  document.getElementById('nlEmail').value='';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const quoteBtn=document.querySelector('.nav-cta');
+  if(quoteBtn) quoteBtn.addEventListener('click',()=>window.location='order.html');
+
+  document.querySelectorAll('.topic-card[data-cat]').forEach(card=>{
+    card.addEventListener('click',()=>filterBycat(card.dataset.cat));
+  });
+  document.querySelectorAll('.topic-card[data-href]').forEach(card=>{
+    card.addEventListener('click',()=>window.location=card.dataset.href);
+  });
+
+  const nlBtn=document.querySelector('.nl-btn');
+  if(nlBtn) nlBtn.addEventListener('click',doSubscribe);
+});
+
+/* MOBILE MENU TOGGLE */
+!function(){
+  const navToggle=document.getElementById('navToggle');
+  const navLinksEl=document.querySelector('.nav-links');
+  const navOverlay=document.getElementById('navOverlay');
+  if(!navToggle||!navLinksEl||!navOverlay) return;
+  function closeMenu(){
+    navToggle.classList.remove('open');
+    navLinksEl.classList.remove('open');
+    navOverlay.classList.remove('open');
+    navToggle.setAttribute('aria-expanded','false');
+    document.body.classList.remove('menu-open');
+  }
+  navToggle.addEventListener('click',()=>{
+    const isOpen=navLinksEl.classList.toggle('open');
+    navToggle.classList.toggle('open',isOpen);
+    navOverlay.classList.toggle('open',isOpen);
+    navToggle.setAttribute('aria-expanded',String(isOpen));
+    document.body.classList.toggle('menu-open',isOpen);
+  });
+  navOverlay.addEventListener('click',closeMenu);
+  navLinksEl.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+  window.addEventListener('resize',()=>{ if(innerWidth>960) closeMenu(); });
+}();
+
+</script>
+</body>
+</html>

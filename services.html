@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services & Pricing — Vexora Designs</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="image_logo.png">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --white: #ffffff;
+  --off: #f7f6f3;
+  --light: #eeece8;
+  --mid: #c8c5be;
+  --text: #1a1917;
+  --text2: #5a5650;
+  --accent: #e8500a;
+  --accent2: #f5a623;
+  --accent-light: #fff0ea;
+  --border: #e2dfd9;
+  --shadow: 0 4px 24px rgba(26,25,23,.07);
+  --shadow-lg: 0 16px 64px rgba(26,25,23,.12);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ── NAV ── */
+nav { position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;background:rgba(255,255,255,0);transition:background .4s,box-shadow .4s,padding .4s; }
+nav.scrolled { background:rgba(255,255,255,.92);box-shadow:0 1px 0 var(--border);backdrop-filter:blur(20px);padding:1rem 4rem; }
+.logo { font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;letter-spacing:-.02em;color:var(--text);text-decoration:none; }
+.logo em { color:var(--accent);font-style:normal; }
+.logo::after { content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s; }
+.logo:hover::after { width:100%; }
+.logo { position:relative; }
+.nav-links { display:flex;gap:2.5rem;list-style:none; }
+.nav-links a { font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);text-decoration:none;position:relative;transition:color .2s; }
+.nav-links a::after { content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s; }
+.nav-links a:hover { color:var(--text); }
+.nav-links a:hover::after { width:100%; }
+.nav-links a.active { color:var(--accent); }
+.nav-links a.active::after { width:100%; }
+.nav-cta { font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--text);color:var(--white);border:none;padding:.7rem 1.5rem;cursor:pointer;position:relative;overflow:hidden;transition:color .3s; }
+.nav-cta::before { content:'';position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform .35s cubic-bezier(.4,0,.2,1); }
+.nav-cta:hover::before { transform:translateX(0); }
+.nav-cta span { position:relative;z-index:1; }
+
+/* ── HERO ── */
+#hero {
+  min-height: 55vh;
+  padding: 10rem 4rem 5rem;
+  background: var(--off);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.hero-dot-grid {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, var(--mid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: .3;
+  pointer-events: none;
+}
+.hero-blob-1 {
+  position: absolute; width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(232,80,10,.1) 0%, transparent 70%);
+  border-radius: 50%; top: -100px; right: -80px;
+  filter: blur(60px);
+  animation: bFloat 10s ease-in-out infinite;
+}
+.hero-blob-2 {
+  position: absolute; width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(245,166,35,.08) 0%, transparent 70%);
+  border-radius: 50%; bottom: 40px; left: 35%;
+  filter: blur(50px);
+  animation: bFloat 14s ease-in-out 3s infinite;
+}
+@keyframes bFloat { 0%,100%{transform:translate(0,0)} 50%{transform:translate(16px,-20px)} }
+
+.hero-inner { position:relative;z-index:1;max-width:820px; }
+.breadcrumb {
+  font-family: 'DM Mono', monospace;
+  font-size: .72rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--text2);
+  margin-bottom: 1.5rem; display: flex; align-items: center; gap: .6rem;
+  opacity: 0; transform: translateY(14px);
+  animation: fadeUp .6s ease forwards .3s;
+}
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb span { color: var(--mid); }
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900; line-height: 1; letter-spacing: -.03em;
+  color: var(--text); margin-bottom: 1.5rem;
+}
+.hero-title .line { display:block;overflow:hidden; }
+.hero-title .line span {
+  display:block; opacity:0; transform:translateY(100%);
+  animation: lineUp .8s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero-title .line:nth-child(1) span { animation-delay:.4s; }
+.hero-title .line:nth-child(2) span { animation-delay:.55s; }
+.hero-title em { color:var(--accent);font-style:italic; }
+
+.hero-sub {
+  font-size: 1.05rem; color: var(--text2); font-weight: 300;
+  max-width: 480px; line-height: 1.8;
+  opacity: 0; transform: translateY(14px);
+  animation: fadeUp .7s ease forwards .9s;
+}
+
+@keyframes lineUp { to { opacity:1;transform:translateY(0); } }
+@keyframes fadeUp { to { opacity:1;transform:translateY(0); } }
+
+/* ── TICKER ── */
+.ticker { background:var(--text);padding:.7rem 0;overflow:hidden;white-space:nowrap; }
+.ticker-in { display:inline-flex;animation:tickr 24s linear infinite; }
+.ticker:hover .ticker-in { animation-play-state:paused; }
+.ticker-in span { font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:0 2rem;transition:color .2s; }
+.ticker-in span:hover { color:var(--accent2); }
+.ticker-in .dot { color:var(--accent);padding:0;font-size:.7rem; }
+@keyframes tickr { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── SECTION COMMONS ── */
+section { padding: 6rem 4rem; }
+.sec-tag { font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem; }
+.sec-tag::before { content:'';width:20px;height:1px;background:var(--accent); }
+.sec-title { font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:var(--text); }
+.sec-sub { font-size:.95rem;color:var(--text2);font-weight:300;line-height:1.8;max-width:500px;margin-top:.8rem; }
+
+/* ── REVEAL ── */
+.reveal { opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1); }
+.reveal.rl { transform:translateX(-40px); }
+.reveal.rr { transform:translateX(40px); }
+.reveal.vis { opacity:1;transform:none; }
+.reveal.delay-0 { transition-delay: 0s; }
+.reveal.delay-05 { transition-delay: .05s; }
+.reveal.delay-1 { transition-delay: .1s; }
+.reveal.delay-15 { transition-delay: .15s; }
+.reveal.delay-2 { transition-delay: .2s; }
+.reveal.delay-3 { transition-delay: .3s; }
+.reveal.delay-45 { transition-delay: .45s; }
+.reveal.center { text-align:center; margin-bottom:0; }
+
+/* ── SERVICES OVERVIEW ── */
+#overview { background:var(--white);padding-top:5rem; }
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 3.5rem;
+  border: 1px solid var(--border);
+}
+.ov-card {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: background .3s;
+}
+.ov-card:hover { background: var(--off); }
+.ov-card::after {
+  content: '';
+  position: absolute; bottom:0;left:0;
+  width:0;height:3px;
+  background: linear-gradient(90deg,var(--accent),var(--accent2));
+  transition: width .4s ease;
+}
+.ov-card:hover::after { width:100%; }
+.ov-num {
+  font-family:'DM Mono',monospace;
+  font-size:.7rem;letter-spacing:.1em;
+  color:var(--mid);margin-bottom:1.5rem;display:block;
+  transition: color .3s;
+}
+.ov-card:hover .ov-num { color:var(--accent); }
+.ov-icon {
+  width:48px;height:48px;border-radius:10px;
+  background:var(--accent-light);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:1.2rem;
+  transition:background .3s,transform .3s;
+}
+.ov-card:hover .ov-icon { background:var(--accent);transform:rotate(6deg) scale(1.05); }
+.ov-name {
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;font-weight:700;letter-spacing:-.02em;
+  color:var(--text);margin-bottom:.5rem;
+}
+.ov-blurb { font-size:.85rem;color:var(--text2);font-weight:300;line-height:1.7; }
+.ov-arrow {
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'DM Mono',monospace;font-size:.7rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);margin-top:1.2rem;
+  opacity:0;transform:translateX(-6px);
+  transition:opacity .3s,transform .3s;
+}
+.ov-card:hover .ov-arrow { opacity:1;transform:translateX(0); }
+
+/* ── SERVICE DETAIL SECTIONS ── */
+.svc-section { padding:5rem 4rem;border-top:1px solid var(--border); }
+.svc-section:nth-child(odd) { background:var(--off); }
+.svc-section:nth-child(even) { background:var(--white); }
+
+.svc-layout { display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:start; }
+.svc-layout.flip { grid-template-columns:1.4fr 1fr; }
+.svc-layout.flip .svc-info { order:2; }
+.svc-layout.flip .svc-packages { order:1; }
+
+.svc-info {}
+.svc-number {
+  font-family:'Playfair Display',serif;
+  font-size:5rem;font-weight:900;
+  color:rgba(26,25,23,.05);
+  line-height:1;letter-spacing:-.04em;
+  margin-bottom:-.5rem;
+  display:block;
+}
+.svc-icon-big {
+  width:64px;height:64px;border-radius:14px;
+  background:var(--accent-light);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;margin-bottom:1.5rem;
+}
+.svc-title { font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;letter-spacing:-.03em;color:var(--text);margin-bottom:1rem;line-height:1.1; }
+.svc-desc { font-size:.95rem;color:var(--text2);font-weight:300;line-height:1.9;margin-bottom:2rem; }
+
+.svc-features { list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem; }
+.svc-features li {
+  display:flex;align-items:flex-start;gap:.75rem;
+  font-size:.88rem;color:var(--text2);font-weight:300;
+}
+.svc-features li::before {
+  content:'';
+  display:block;flex-shrink:0;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--accent-light);
+  border:1.5px solid var(--accent);
+  margin-top:.15rem;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.5 9L7.5 12L13.5 6' stroke='%23e8500a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.svc-tags { display:flex;flex-wrap:wrap;gap:.4rem; }
+.tag {
+  font-size:.7rem;font-weight:500;letter-spacing:.04em;
+  color:var(--text2);background:var(--off);
+  border:1px solid var(--border);padding:.25rem .75rem;
+  border-radius:100px;
+  transition:color .2s,background .2s,border-color .2s,transform .2s;
+  cursor:default;
+}
+.tag:hover { color:var(--accent);background:var(--accent-light);border-color:var(--accent);transform:translateY(-2px); }
+
+/* ── PRICING PACKAGES ── */
+.svc-packages { display:flex;flex-direction:column;gap:1rem; }
+.pkg {
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  padding:1.8rem 2rem;
+  box-shadow:var(--shadow);
+  position:relative;overflow:hidden;
+  transition:border-color .3s,box-shadow .35s,transform .3s;
+  cursor:default;
+}
+.pkg:hover { border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-3px); }
+.pkg.featured {
+  border-color:var(--accent);
+  background: linear-gradient(135deg,#fff8f5 0%,#fff3ed 100%);
+}
+.pkg.featured::before {
+  content:'Most Popular';
+  position:absolute;top:1.2rem;right:1.2rem;
+  font-family:'DM Mono',monospace;font-size:.62rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-light);
+  border:1px solid rgba(232,80,10,.2);
+  padding:.25rem .65rem;border-radius:100px;
+}
+.pkg-tier {
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text2);margin-bottom:.5rem;
+}
+.pkg-name {
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;font-weight:700;letter-spacing:-.02em;
+  color:var(--text);margin-bottom:.3rem;
+}
+.pkg-price {
+  font-family:'Playfair Display',serif;
+  font-size:2rem;font-weight:900;letter-spacing:-.03em;
+  color:var(--accent);margin-bottom:.2rem;line-height:1;
+}
+.pkg-price sup { font-size:1rem;font-weight:700;vertical-align:super; }
+.pkg-price sub { font-size:.8rem;font-weight:400;color:var(--text2);vertical-align:baseline;margin-left:.2rem; }
+.pkg-note { font-size:.78rem;color:var(--text2);font-weight:300;margin-bottom:1.2rem; }
+.pkg-divider { height:1px;background:var(--border);margin:1.2rem 0; }
+.pkg-items { list-style:none;display:flex;flex-direction:column;gap:.5rem; }
+.pkg-items li {
+  font-size:.82rem;color:var(--text2);font-weight:300;
+  display:flex;align-items:center;gap:.6rem;
+}
+.pkg-items li::before {
+  content:'✓';color:var(--accent);font-weight:600;font-size:.8rem;flex-shrink:0;
+}
+.pkg-items li.no::before { content:'✗';color:var(--mid); }
+.pkg-items li.no { color:var(--mid); }
+
+/* ── PROCESS BAND ── */
+#process { background:var(--text);padding:5rem 4rem; }
+#process .sec-tag { color:rgba(255,255,255,.4); }
+#process .sec-tag::before { background:rgba(255,255,255,.4); }
+#process .sec-title { color:var(--white); }
+#process .sec-sub { color:rgba(255,255,255,.5); }
+
+.proc-steps {
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;margin-top:4rem;position:relative;
+}
+.proc-line { position:absolute;top:23px;left:0;right:0;height:1px;background:rgba(255,255,255,.1);z-index:0; }
+.proc-fill { height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1.4s ease; }
+.proc-fill.vis { width:100%; }
+.proc-step { padding:0 2rem;position:relative;z-index:1; }
+.proc-dot {
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:.78rem;
+  color:rgba(255,255,255,.25);margin-bottom:1.5rem;
+  transition:background .4s,border-color .4s,color .4s,transform .4s;
+}
+.proc-step.act .proc-dot { background:var(--accent-light);border-color:var(--accent);color:var(--accent);transform:scale(1.12); }
+.proc-ttl { font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;letter-spacing:-.02em;color:rgba(255,255,255,.25);margin-bottom:.4rem;transition:color .4s; }
+.proc-step.act .proc-ttl { color:var(--white); }
+.proc-dsc { font-size:.82rem;color:rgba(255,255,255,.15);font-weight:300;line-height:1.7;transition:color .4s; }
+.proc-step.act .proc-dsc { color:rgba(255,255,255,.5); }
+
+/* ── FAQ ── */
+#faq { background:var(--off);padding:5rem 4rem; }
+.faq-grid { display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:3.5rem; }
+.faq-item {
+  background:var(--white);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  box-shadow:var(--shadow);
+  transition:border-color .3s,box-shadow .3s;
+}
+.faq-item:hover { border-color:var(--accent);box-shadow:var(--shadow-lg); }
+.faq-q {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 1.8rem;cursor:pointer;gap:1rem;
+  font-size:.95rem;font-weight:500;color:var(--text);
+  transition:color .2s;
+}
+.faq-q:hover { color:var(--accent); }
+.faq-toggle {
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:var(--off);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:var(--accent);
+  transition:background .3s,transform .4s;
+}
+.faq-item.open .faq-toggle { background:var(--accent);color:var(--white);transform:rotate(45deg); }
+.faq-a {
+  max-height:0;overflow:hidden;
+  transition:max-height .45s cubic-bezier(.16,1,.3,1),padding .45s;
+  font-size:.88rem;color:var(--text2);font-weight:300;line-height:1.8;
+}
+.faq-item.open .faq-a { max-height:300px;padding:0 1.8rem 1.4rem; }
+
+/* ── CTA SECTION ── */
+#cta {
+  background:var(--white);padding:6rem 4rem;
+  text-align:center;
+  border-top:1px solid var(--border);
+}
+.cta-inner { max-width:640px;margin:0 auto; }
+.cta-eyebrow {
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--accent-light);color:var(--accent);
+  font-size:.75rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;padding:.4rem 1rem;border-radius:100px;
+  margin-bottom:2rem;
+}
+.cta-eyebrow::before { content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.5s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.3} }
+.cta-title { font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;color:var(--text);margin-bottom:1.2rem; }
+.cta-title em { color:var(--accent);font-style:italic; }
+.cta-sub { font-size:1rem;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:2.5rem; }
+.cta-actions { display:flex;gap:1rem;justify-content:center;flex-wrap:wrap; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--text);color:var(--white);
+  padding:.9rem 2rem;text-decoration:none;border-radius:8px;
+  position:relative;overflow:hidden;transition:color .3s;
+  cursor:pointer;border:none;
+}
+.btn-primary::before { content:'';position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform .35s cubic-bezier(.4,0,.2,1); }
+.btn-primary:hover::before { transform:translateX(0); }
+.btn-primary span { position:relative;z-index:1; }
+.btn-primary svg { position:relative;z-index:1;width:16px;height:16px;transition:transform .3s; }
+.btn-primary:hover svg { transform:translateX(4px); }
+
+.btn-outline {
+  display:inline-flex;align-items:center;
+  font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--text);padding:.9rem 2rem;text-decoration:none;border-radius:8px;
+  border:1.5px solid var(--border);
+  position:relative;overflow:hidden;transition:color .3s,border-color .3s;
+  cursor:pointer;
+}
+.btn-outline::before { content:'';position:absolute;inset:0;background:var(--text);transform:translateY(101%);transition:transform .35s cubic-bezier(.4,0,.2,1); }
+.btn-outline:hover { color:var(--white);border-color:var(--text); }
+.btn-outline:hover::before { transform:translateY(0); }
+.btn-outline span { position:relative;z-index:1; }
+
+/* ── FOOTER ── */
+footer { background:var(--text);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem; }
+.flogo { font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--white); }
+.flogo em { color:var(--accent);font-style:normal; }
+.fcopy { font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:rgba(255,255,255,.3); }
+.fsoc { display:flex;gap:.7rem; }
+.sbtn { width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:.75rem;color:rgba(255,255,255,.35);cursor:pointer;text-decoration:none;transition:border-color .3s,color .3s,background .3s,transform .3s; }
+.sbtn:hover { border-color:var(--accent);color:var(--white);background:var(--accent);transform:translateY(-4px); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:1.2rem 1.5rem;}
+  .nav-links{display:none;}
+  section,.svc-section,#process,#faq,#cta{padding:4rem 1.5rem;}
+  #hero{padding:8rem 1.5rem 4rem;}
+  .overview-grid{grid-template-columns:1fr 1fr;}
+  .svc-layout,.svc-layout.flip{grid-template-columns:1fr;}
+  .svc-layout.flip .svc-info{order:1;}
+  .svc-layout.flip .svc-packages{order:2;}
+  .proc-steps{grid-template-columns:1fr 1fr;gap:2rem;}
+  .proc-line{display:none;}
+  .faq-grid{grid-template-columns:1fr;}
+  body{cursor:default;}
+  #cur,#cur-ring{display:none;}
+}
+@media(max-width:640px){
+  body{font-size:15px;}
+  nav{padding:.75rem 1rem;}
+  nav.scrolled{padding:.65rem 1rem;}
+  .logo{font-size:1.05rem;}
+  .nav-cta{padding:.65rem .85rem;font-size:.68rem;}
+  #hero{padding:7.5rem 1rem 3rem;min-height:auto;}
+  .hero-blob-1{width:220px;height:220px;}
+  .hero-blob-2{width:150px;height:150px;}
+  .breadcrumb{font-size:.66rem;margin-bottom:1.1rem;}
+  .hero-title{font-size:clamp(2.2rem,11vw,3rem);}
+  .hero-sub{font-size:.92rem;line-height:1.7;}
+  .ticker-in span{font-size:.72rem;padding:0 1.1rem;}
+  section,.svc-section,#process,#faq,#cta{padding:3.5rem 1rem;}
+  #overview{padding-top:3.5rem;}
+  .sec-title{font-size:clamp(1.8rem,9vw,2.4rem);}
+  .sec-sub{font-size:.88rem;}
+  .overview-grid{grid-template-columns:1fr;margin-top:2rem;}
+  .ov-card{padding:1.6rem 1.4rem;}
+  .svc-layout{gap:2.5rem;}
+  .svc-number{font-size:3.2rem;}
+  .svc-icon-big{width:52px;height:52px;font-size:1.5rem;}
+  .svc-title{font-size:1.65rem;}
+  .svc-desc{font-size:.88rem;line-height:1.8;}
+  .pkg{padding:1.4rem 1.5rem;}
+  .pkg-price{font-size:1.6rem;}
+  .proc-steps{grid-template-columns:1fr;gap:1.4rem;margin-top:2.5rem;}
+  .proc-step{padding:0;}
+  .faq-q{padding:1.1rem 1.3rem;font-size:.86rem;}
+  .faq-item.open .faq-a{padding:0 1.3rem 1.1rem;}
+  .cta-title{font-size:clamp(1.8rem,9vw,2.4rem);}
+  .cta-sub{font-size:.88rem;}
+  .cta-actions{display:grid;grid-template-columns:1fr;gap:.75rem;}
+  .cta-actions .btn-primary,.cta-actions .btn-outline{width:100%;justify-content:center;}
+  footer{padding:2rem 1rem;flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:380px){
+  .logo{font-size:.98rem;}
+  .logo img{width:32px;height:32px;}
+  .hero-title{font-size:clamp(2rem,12vw,2.6rem);}
+}
+.logo,.flogo{display:inline-flex;align-items:center;gap:.55rem;}
+.logo img,.flogo img{width:44px;height:44px;border-radius:9px;object-fit:cover;box-shadow:0 6px 18px rgba(232,80,10,.18);flex:0 0 auto;}
+.flogo img{width:38px;height:38px;}
+.logo span,.flogo span{display:inline-block;}
+
+/* ── MOBILE MENU ── */
+.nav-toggle{display:none;}
+@media(max-width:960px){
+  .nav-toggle{
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    gap:5px;width:38px;height:38px;background:none;border:none;cursor:pointer;
+    z-index:201;flex:0 0 auto;order:3;
+  }
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s ease,opacity .3s ease;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .nav-links{
+    display:flex !important;position:fixed;top:0;right:0;height:100vh;height:100dvh;width:78%;max-width:320px;
+    background:var(--white);flex-direction:column;align-items:flex-start;
+    padding:6.5rem 2rem 2rem;gap:0;box-shadow:-8px 0 40px rgba(26,25,23,.18);
+    transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);
+    z-index:200;overflow-y:auto;
+  }
+  .nav-links.open{transform:translateX(0);}
+  .nav-links li{width:100%;border-bottom:1px solid var(--border);}
+  .nav-links a{display:block;padding:1rem 0;font-size:.95rem;}
+  .nav-links a::after{display:none;}
+
+  .nav-overlay{
+    display:none;position:fixed;inset:0;background:rgba(26,25,23,.45);
+    z-index:150;opacity:0;transition:opacity .3s ease;
+  }
+  .nav-overlay.open{display:block;opacity:1;}
+  body.menu-open{overflow:hidden;}
+  .nav-back{order:2;}
+}
+
+
+/* Mobile layout hardening */
+@media(max-width:960px){
+  html,
+  body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+  body{position:relative;}
+  body > *,
+  main,
+  section,
+  footer,
+  #hero,
+  .ticker{
+    max-width:100%;
+    overflow-x:clip;
+  }
+  img,
+  svg,
+  video,
+  canvas{max-width:100%;}
+  nav,
+  nav.scrolled{
+    min-height:64px;
+    padding:.75rem 1rem;
+    gap:.75rem;
+    z-index:10000;
+    background:rgba(255,255,255,.96);
+    box-shadow:0 1px 0 var(--border);
+    backdrop-filter:blur(18px);
+  }
+  .logo{min-width:0;flex:1;overflow:hidden;}
+  .logo span{line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  nav .nav-cta,
+  nav .nav-back{display:none;}
+  .nav-links{z-index:10001;}
+  .nav-toggle{z-index:10002;margin-left:auto;}
+  .nav-overlay{z-index:9999;}
+  .hero-title,
+  .sec-title,
+  .cta-title{
+    max-width:100%;
+    overflow-wrap:break-word;
+    word-break:normal;
+  }
+  .hero-title{font-size:clamp(2rem,10.5vw,2.85rem)!important;}
+  .hero-title .line,
+  .hero-title .line span{max-width:100%;}
+  .reveal.rl,
+  .reveal.rr{transform:translateY(40px);}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="logo"><img src="image_logo.png" alt="Vexora Designs logo"><span>Vexora <em>Designs</em></span></a>
+  <ul id="navLinks" class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="blog.html">Insights</a></li>
+    <li><a href="order.html">Order</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+  <button class="nav-cta" id="quoteButton"><span>Get a Quote</span></button>
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-dot-grid"></div>
+  <div class="hero-blob-1"></div>
+  <div class="hero-blob-2"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span> Services</div>
+    <h1 class="hero-title">
+      <div class="line"><span>Everything your</span></div>
+      <div class="line"><span>brand <em>needs.</em></span></div>
+    </h1>
+    <p class="hero-sub">Four core services, three clear packages each. No confusing quotes — just honest pricing and exceptional creative work.</p>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-in">
+    <span>Logo & Branding</span><span class="dot"> ✦ </span>
+    <span>Social Media Design</span><span class="dot"> ✦ </span>
+    <span>Print & Packaging</span><span class="dot"> ✦ </span>
+    <span>Web & UI Design</span><span class="dot"> ✦ </span>
+    <span>Fast Turnaround</span><span class="dot"> ✦ </span>
+    <span>Unlimited Revisions</span><span class="dot"> ✦ </span>
+    <span>Logo & Branding</span><span class="dot"> ✦ </span>
+    <span>Social Media Design</span><span class="dot"> ✦ </span>
+    <span>Print & Packaging</span><span class="dot"> ✦ </span>
+    <span>Web & UI Design</span><span class="dot"> ✦ </span>
+    <span>Fast Turnaround</span><span class="dot"> ✦ </span>
+    <span>Unlimited Revisions</span><span class="dot"> ✦ </span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="reveal">
+    <div class="sec-tag">What We Offer</div>
+    <h2 class="sec-title">Our Services</h2>
+    <p class="sec-sub">Click any service to jump straight to the packages and pricing.</p>
+  </div>
+  <div class="overview-grid">
+    <div class="ov-card reveal delay-05" data-scroll-target="branding">
+      <span class="ov-num">01</span>
+      <div class="ov-icon">⬡</div>
+      <div class="ov-name">Logo & Branding</div>
+      <p class="ov-blurb">Timeless logos and complete brand identities that make your business instantly recognizable.</p>
+      <div class="ov-arrow">View packages <span>→</span></div>
+    </div>
+    <div class="ov-card reveal delay-1" data-scroll-target="social">
+      <span class="ov-num">02</span>
+      <div class="ov-icon">◈</div>
+      <div class="ov-name">Social Media Design</div>
+      <p class="ov-blurb">Eye-catching content that makes your feed look like a brand, not just photos.</p>
+      <div class="ov-arrow">View packages <span>→</span></div>
+    </div>
+    <div class="ov-card reveal delay-15" data-scroll-target="print">
+      <span class="ov-num">03</span>
+      <div class="ov-icon">▣</div>
+      <div class="ov-name">Print & Packaging</div>
+      <p class="ov-blurb">Print-ready files built for real-world impact — from business cards to billboards.</p>
+      <div class="ov-arrow">View packages <span>→</span></div>
+    </div>
+    <div class="ov-card reveal delay-2" data-scroll-target="web">
+      <span class="ov-num">04</span>
+      <div class="ov-icon">⬚</div>
+      <div class="ov-name">Web & UI Design</div>
+      <p class="ov-blurb">Pixel-perfect mockups and UI designs, mobile-friendly and developer-ready.</p>
+      <div class="ov-arrow">View packages <span>→</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICE 1: BRANDING ── -->
+<div class="svc-section" id="branding">
+  <div class="svc-layout">
+    <div class="svc-info reveal rl">
+      <span class="svc-number">01</span>
+      <div class="svc-icon-big">⬡</div>
+      <h2 class="svc-title">Logo & Branding</h2>
+      <p class="svc-desc">We build brand identities that last decades, not just until the next trend. Every element — from the logomark to the colour palette — is crafted with intention and strategic thinking.</p>
+      <ul class="svc-features">
+        <li>Custom logo design from scratch</li>
+        <li>Full brand identity system</li>
+        <li>Colour palette & typography selection</li>
+        <li>Brand guidelines document</li>
+        <li>All file formats (AI, EPS, SVG, PNG, PDF)</li>
+        <li>Commercial usage rights included</li>
+      </ul>
+      <div class="svc-tags">
+        <span class="tag">Logo Design</span>
+        <span class="tag">Brand Identity</span>
+        <span class="tag">Style Guide</span>
+        <span class="tag">Rebranding</span>
+        <span class="tag">Stationery</span>
+        <span class="tag">Brand Strategy</span>
+      </div>
+    </div>
+    <div class="svc-packages reveal rr">
+      <div class="pkg reveal delay-05">
+        <div class="pkg-tier">Starter</div>
+        <div class="pkg-name">Logo Essentials</div>
+        <div class="pkg-price"><sup>$</sup>149<sub>one-time</sub></div>
+        <div class="pkg-note">Perfect for new businesses & startups</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>3 initial logo concepts</li>
+          <li>2 rounds of revisions</li>
+          <li>PNG & PDF files</li>
+          <li>Colour & b&w versions</li>
+          <li class="no">Brand guidelines</li>
+          <li class="no">Social media kit</li>
+        </ul>
+      </div>
+      <div class="pkg featured reveal delay-1">
+        <div class="pkg-tier">Professional</div>
+        <div class="pkg-name">Brand Identity</div>
+        <div class="pkg-price"><sup>$</sup>399<sub>one-time</sub></div>
+        <div class="pkg-note">Complete identity for growing businesses</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>5 initial logo concepts</li>
+          <li>Unlimited revisions</li>
+          <li>All file formats (AI, EPS, SVG, PNG)</li>
+          <li>Colour, b&w & reversed versions</li>
+          <li>Brand guidelines (20+ pages)</li>
+          <li>Social media profile kit</li>
+        </ul>
+      </div>
+      <div class="pkg reveal delay-15">
+        <div class="pkg-tier">Premium</div>
+        <div class="pkg-name">Full Brand System</div>
+        <div class="pkg-price"><sup>$</sup>799<sub>one-time</sub></div>
+        <div class="pkg-note">Everything + stationery & launch assets</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Everything in Professional</li>
+          <li>Business card design</li>
+          <li>Letterhead & email signature</li>
+          <li>Brand pattern / texture design</li>
+          <li>10 social media templates</li>
+          <li>Priority 3-day delivery</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SERVICE 2: SOCIAL MEDIA ── -->
+<div class="svc-section" id="social">
+  <div class="svc-layout flip">
+    <div class="svc-packages reveal rl">
+      <div class="pkg reveal delay-05">
+        <div class="pkg-tier">Starter</div>
+        <div class="pkg-name">Social Starter</div>
+        <div class="pkg-price"><sup>$</sup>99<sub>/ month</sub></div>
+        <div class="pkg-note">For businesses just getting started on social</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>12 post designs per month</li>
+          <li>1 platform (Instagram or Facebook)</li>
+          <li>Static posts only</li>
+          <li>2 rounds of revisions</li>
+          <li class="no">Story templates</li>
+          <li class="no">Content calendar</li>
+        </ul>
+      </div>
+      <div class="pkg featured reveal delay-1">
+        <div class="pkg-tier">Professional</div>
+        <div class="pkg-name">Social Pro</div>
+        <div class="pkg-price"><sup>$</sup>249<sub>/ month</sub></div>
+        <div class="pkg-note">For brands that want to dominate their feed</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>30 post designs per month</li>
+          <li>2 platforms included</li>
+          <li>Posts + stories + highlights covers</li>
+          <li>Unlimited revisions</li>
+          <li>Monthly content calendar</li>
+          <li>Branded Canva/template kit</li>
+        </ul>
+      </div>
+      <div class="pkg reveal delay-15">
+        <div class="pkg-tier">Premium</div>
+        <div class="pkg-name">Social Complete</div>
+        <div class="pkg-price"><sup>$</sup>499<sub>/ month</sub></div>
+        <div class="pkg-note">Full multi-platform social presence</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>60 post designs per month</li>
+          <li>All platforms (IG, FB, TikTok, LinkedIn)</li>
+          <li>Posts, stories, reels covers & ads</li>
+          <li>Unlimited revisions</li>
+          <li>Strategy & content calendar</li>
+          <li>Dedicated designer assigned</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-info reveal rr">
+      <span class="svc-number">02</span>
+      <div class="svc-icon-big">◈</div>
+      <h2 class="svc-title">Social Media Design</h2>
+      <p class="svc-desc">Scroll-stopping content crafted for every platform. We don't just make pretty posts — we design content that builds brand recognition, drives engagement, and converts followers into customers.</p>
+      <ul class="svc-features">
+        <li>Platform-optimised formats & dimensions</li>
+        <li>Consistent brand look across all posts</li>
+        <li>Instagram, Facebook, TikTok & LinkedIn</li>
+        <li>Stories, reels covers & highlight icons</li>
+        <li>Monthly content calendars available</li>
+        <li>Editable template files (Canva / Figma)</li>
+      </ul>
+      <div class="svc-tags">
+        <span class="tag">Instagram</span>
+        <span class="tag">Facebook</span>
+        <span class="tag">TikTok</span>
+        <span class="tag">LinkedIn</span>
+        <span class="tag">Stories</span>
+        <span class="tag">Reels</span>
+        <span class="tag">Templates</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SERVICE 3: PRINT ── -->
+<div class="svc-section" id="print">
+  <div class="svc-layout">
+    <div class="svc-info reveal rl">
+      <span class="svc-number">03</span>
+      <div class="svc-icon-big">▣</div>
+      <h2 class="svc-title">Print & Packaging</h2>
+      <p class="svc-desc">From a business card you're proud to hand out, to packaging that makes customers fall in love before they even open the box. We deliver files that go straight to print — no back-and-forth with your printer.</p>
+      <ul class="svc-features">
+        <li>Print-ready CMYK files with bleeds</li>
+        <li>Business cards, flyers & brochures</li>
+        <li>Product packaging & label design</li>
+        <li>Large format (banners, billboards, signs)</li>
+        <li>Multiple print vendor templates</li>
+        <li>Mockup previews before final delivery</li>
+      </ul>
+      <div class="svc-tags">
+        <span class="tag">Business Cards</span>
+        <span class="tag">Flyers</span>
+        <span class="tag">Brochures</span>
+        <span class="tag">Packaging</span>
+        <span class="tag">Banners</span>
+        <span class="tag">Billboards</span>
+        <span class="tag">Labels</span>
+      </div>
+    </div>
+    <div class="svc-packages reveal rr">
+      <div class="pkg reveal delay-05">
+        <div class="pkg-tier">Starter</div>
+        <div class="pkg-name">Single Print Item</div>
+        <div class="pkg-price"><sup>$</sup>79<sub>per item</sub></div>
+        <div class="pkg-note">One design, done right</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>1 print item (your choice)</li>
+          <li>2 design concepts</li>
+          <li>2 rounds of revisions</li>
+          <li>Print-ready PDF delivery</li>
+          <li class="no">Mockup previews</li>
+          <li class="no">Source files</li>
+        </ul>
+      </div>
+      <div class="pkg featured reveal delay-1">
+        <div class="pkg-tier">Professional</div>
+        <div class="pkg-name">Print Bundle</div>
+        <div class="pkg-price"><sup>$</sup>299<sub>one-time</sub></div>
+        <div class="pkg-note">Most popular for new businesses</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Up to 5 print items</li>
+          <li>3 design concepts per item</li>
+          <li>Unlimited revisions</li>
+          <li>Print-ready PDF + source files</li>
+          <li>Realistic mockup previews</li>
+          <li>Consistent branded look</li>
+        </ul>
+      </div>
+      <div class="pkg reveal delay-15">
+        <div class="pkg-tier">Premium</div>
+        <div class="pkg-name">Full Print Suite</div>
+        <div class="pkg-price"><sup>$</sup>599<sub>one-time</sub></div>
+        <div class="pkg-note">Complete print identity package</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Unlimited print items</li>
+          <li>Packaging design included</li>
+          <li>Large format designs included</li>
+          <li>All source files (AI, PSD, PDF)</li>
+          <li>Print vendor coordination</li>
+          <li>Priority 5-day turnaround</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SERVICE 4: WEB & UI ── -->
+<div class="svc-section" id="web">
+  <div class="svc-layout flip">
+    <div class="svc-packages reveal rl">
+      <div class="pkg reveal delay-05">
+        <div class="pkg-tier">Starter</div>
+        <div class="pkg-name">Landing Page</div>
+        <div class="pkg-price"><sup>$</sup>249<sub>one-time</sub></div>
+        <div class="pkg-note">Single page mockup, ready to build</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>1 page Figma design</li>
+          <li>Desktop only</li>
+          <li>2 design concepts</li>
+          <li>2 rounds of revisions</li>
+          <li class="no">Mobile-responsive design</li>
+          <li class="no">Component library</li>
+        </ul>
+      </div>
+      <div class="pkg featured reveal delay-1">
+        <div class="pkg-tier">Professional</div>
+        <div class="pkg-name">Website Design</div>
+        <div class="pkg-price"><sup>$</sup>699<sub>one-time</sub></div>
+        <div class="pkg-note">Full site design, developer-ready</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Up to 6 page designs</li>
+          <li>Desktop + mobile responsive</li>
+          <li>3 design concepts</li>
+          <li>Unlimited revisions</li>
+          <li>Figma component library</li>
+          <li>Developer handoff notes</li>
+        </ul>
+      </div>
+      <div class="pkg reveal delay-15">
+        <div class="pkg-tier">Premium</div>
+        <div class="pkg-name">Full UI System</div>
+        <div class="pkg-price"><sup>$</sup>1,299<sub>one-time</sub></div>
+        <div class="pkg-note">Complete design system for apps & platforms</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li>Unlimited pages & screens</li>
+          <li>Desktop, tablet & mobile</li>
+          <li>Full interactive prototype</li>
+          <li>Complete design system / UI kit</li>
+          <li>Icon set & illustration style</li>
+          <li>Developer handoff via Figma/Zeplin</li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc-info reveal rr">
+      <span class="svc-number">04</span>
+      <div class="svc-icon-big">⬚</div>
+      <h2 class="svc-title">Web & UI Design</h2>
+      <p class="svc-desc">Beautiful website mockups and UI systems that your developer will love working with. We deliver fully interactive Figma prototypes with proper component structures — not just screenshots.</p>
+      <ul class="svc-features">
+        <li>Figma-based design & prototyping</li>
+        <li>Desktop + mobile-first responsive design</li>
+        <li>Reusable component libraries</li>
+        <li>Interactive prototypes & user flows</li>
+        <li>Developer-ready handoff notes</li>
+        <li>Design system documentation</li>
+      </ul>
+      <div class="svc-tags">
+        <span class="tag">Figma</span>
+        <span class="tag">Landing Pages</span>
+        <span class="tag">UI Kits</span>
+        <span class="tag">Prototyping</span>
+        <span class="tag">Mobile Design</span>
+        <span class="tag">E-commerce</span>
+        <span class="tag">SaaS</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="reveal">
+    <div class="sec-tag">How It Works</div>
+    <h2 class="sec-title" style="color:var(--white)">Simple. Smooth. Fast.</h2>
+    <p class="sec-sub" style="color:rgba(255,255,255,.5)">From first message to final file in four straightforward steps.</p>
+  </div>
+  <div class="proc-steps" id="proc">
+    <div class="proc-line"><div class="proc-fill" id="pfill"></div></div>
+    <div class="proc-step reveal delay-0">
+      <div class="proc-dot">01</div>
+      <div class="proc-ttl">You reach out</div>
+      <p class="proc-dsc">Send us your brief via the contact form or WhatsApp. Tell us what you need — as much or as little detail as you have.</p>
+    </div>
+    <div class="proc-step reveal delay-15">
+      <div class="proc-dot">02</div>
+      <div class="proc-ttl">We scope it</div>
+      <p class="proc-dsc">Within 24 hours we'll send you a clear proposal with timeline, deliverables, and a fixed price. No surprises.</p>
+    </div>
+    <div class="proc-step reveal delay-3">
+      <div class="proc-dot">03</div>
+      <div class="proc-ttl">We design</div>
+      <p class="proc-dsc">Our team gets to work. You'll see initial concepts and can give feedback at every stage until it's exactly right.</p>
+    </div>
+    <div class="proc-step reveal delay-45">
+      <div class="proc-dot">04</div>
+      <div class="proc-ttl">You get the files</div>
+      <p class="proc-dsc">Final files delivered in every format you need, organized neatly and ready to use straight away.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="reveal center">
+    <div class="sec-tag" style="justify-content:center">Common Questions</div>
+    <h2 class="sec-title">FAQs</h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item reveal delay-05">
+      <div class="faq-q">
+        How long does a project take?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Most logo projects take 5–10 business days. Social media packages are delivered monthly. Web designs typically take 2–4 weeks depending on complexity. We always confirm the timeline in your proposal before starting.</div>
+    </div>
+    <div class="faq-item reveal delay-1">
+      <div class="faq-q">
+        Do you offer revisions?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Yes — all Professional and Premium packages include unlimited revisions until you're completely satisfied. Starter packages include 2 rounds. We want you to love the end result.</div>
+    </div>
+    <div class="faq-item reveal delay-05">
+      <div class="faq-q">
+        What file formats do you deliver?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">For branding: AI, EPS, SVG, PNG, PDF (all sizes and colour variants). For print: print-ready PDF with bleeds and crop marks. For web: Figma files with assets exported as SVG/PNG/WebP. For social: high-res PNG and Canva templates.</div>
+    </div>
+    <div class="faq-item reveal delay-1">
+      <div class="faq-q">
+        Can I customise a package?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Absolutely. The packages above are our most common combinations, but every project is different. Contact us with what you need and we'll build a custom quote that fits your exact requirements and budget.</div>
+    </div>
+    <div class="faq-item reveal delay-05">
+      <div class="faq-q">
+        How do I pay?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">We accept bank transfer, Easypaisa, JazzCash, and international payments via Payoneer or Wise. A 50% deposit is required to start, with the balance due on final delivery.</div>
+    </div>
+    <div class="faq-item reveal delay-1">
+      <div class="faq-q">
+        Do I own the final designs?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Yes — upon final payment you receive full commercial ownership of all delivered files. No ongoing licensing fees, no strings attached. The designs are yours to use however you like.</div>
+    </div>
+    <div class="faq-item reveal delay-05">
+      <div class="faq-q">
+        Do you work with clients outside Pakistan?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Yes! We work with clients all over the world. Communication is handled via WhatsApp, email, or video call, and we're comfortable working across time zones. Our pricing is in USD for international clients.</div>
+    </div>
+    <div class="faq-item reveal delay-1">
+      <div class="faq-q">
+        What if I need something urgently?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Rush delivery is available for most projects at an additional fee. Contact us with your deadline and we'll do our best to accommodate — we've delivered complete brand identities in 48 hours when needed.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner reveal">
+    <div class="cta-eyebrow">Ready to start?</div>
+    <h2 class="cta-title">Let's build something <em>great</em> together.</h2>
+    <p class="cta-sub">Drop us a message and we'll have a proposal in your inbox within 24 hours. No commitment, no pressure — just a clear plan.</p>
+    <div class="cta-actions">
+      <a href="order.html" class="btn-primary">
+        <span>Start a Project</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="portfolio.html" class="btn-outline"><span>See Our Work First</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo"><img src="image_logo.png" alt="Vexora Designs logo"><span>Vexora <em>Designs</em></span></div>
+  <div class="fcopy">© 2025 Vexora Designs. Quetta, Pakistan.</div>
+  <div class="fsoc">
+    <a class="sbtn" href="#" title="Instagram">ig</a>
+    <a class="sbtn" href="#" title="Behance">be</a>
+    <a class="sbtn" href="#" title="WhatsApp">wa</a>
+    <a class="sbtn" href="#" title="LinkedIn">in</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const quoteButton = document.getElementById('quoteButton');
+  const navToggle = document.getElementById('navToggle');
+  const navLinksEl = document.querySelector('.nav-links');
+  const navOverlay = document.getElementById('navOverlay');
+
+  if (quoteButton) {
+    quoteButton.addEventListener('click', () => {
+      window.location.href = 'order.html';
+    });
+  }
+
+  document.querySelectorAll('[data-scroll-target]').forEach(card => {
+    card.addEventListener('click', () => {
+      const targetId = card.dataset.scrollTarget;
+      const target = document.getElementById(targetId);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    card.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        card.click();
+      }
+    });
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `Jump to ${card.dataset.scrollTarget.replace('-', ' ')}`);
+  });
+
+  const navEl = document.getElementById('nav');
+  window.addEventListener('scroll', () => navEl?.classList.toggle('scrolled', window.scrollY > 60));
+
+  const blob1 = document.querySelector('.hero-blob-1');
+  const blob2 = document.querySelector('.hero-blob-2');
+  document.addEventListener('mousemove', e => {
+    const xr = (e.clientX / window.innerWidth - .5) * 20;
+    const yr = (e.clientY / window.innerHeight - .5) * 20;
+    if (blob1) blob1.style.transform = `translate(${xr}px,${yr}px)`;
+    if (blob2) blob2.style.transform = `translate(${-xr * .6}px,${-yr * .6}px)`;
+  });
+
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('vis');
+    });
+  }, { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  const processObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.getElementById('pfill')?.classList.add('vis');
+        document.querySelectorAll('.proc-step').forEach((step, index) => setTimeout(() => step.classList.add('act'), index * 300));
+      }
+    });
+  }, { threshold: .3 });
+  const processSection = document.getElementById('proc');
+  if (processSection) processObserver.observe(processSection);
+
+  document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta').forEach(button => {
+    button.addEventListener('mousemove', e => {
+      const r = button.getBoundingClientRect();
+      button.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .2}px,${(e.clientY - r.top - r.height / 2) * .2}px)`;
+    });
+    button.addEventListener('mouseleave', () => { button.style.transform = ''; });
+  });
+
+  document.querySelectorAll('.pkg').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5;
+      const y = (e.clientY - r.top) / r.height - .5;
+      card.style.transform = `perspective(700px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(-3px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+
+  const faqToggles = document.querySelectorAll('.faq-q');
+  faqToggles.forEach(toggle => {
+    toggle.tabIndex = 0;
+    toggle.setAttribute('role', 'button');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.addEventListener('click', () => toggleFaq(toggle));
+    toggle.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleFaq(toggle);
+      }
+    });
+  });
+
+  function toggleFaq(toggle) {
+    const item = toggle.closest('.faq-item');
+    const isOpen = item.classList.toggle('open');
+    faqToggles.forEach(t => t.setAttribute('aria-expanded', String(t.closest('.faq-item').classList.contains('open'))));
+  }
+
+  if (navToggle && navLinksEl && navOverlay) {
+    function closeMenu() {
+      navToggle.classList.remove('open');
+      navLinksEl.classList.remove('open');
+      navOverlay.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+    navToggle.addEventListener('click', () => {
+      const isOpen = !navLinksEl.classList.contains('open');
+      navToggle.classList.toggle('open', isOpen);
+      navLinksEl.classList.toggle('open', isOpen);
+      navOverlay.classList.toggle('open', isOpen);
+      document.body.classList.toggle('menu-open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    navOverlay.addEventListener('click', closeMenu);
+    navLinksEl.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => { if (window.innerWidth > 960) closeMenu(); });
+  }
+})();
+</script>
+</body>
+</html>

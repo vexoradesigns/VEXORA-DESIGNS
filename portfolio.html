@@ -1,0 +1,445 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Work — Vexora Designs</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="image_logo.png">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--white:#ffffff;--off:#f7f6f3;--mid:#c8c5be;--text:#1a1917;--text2:#5a5650;--accent:#e8500a;--accent2:#f5a623;--alight:#fff0ea;--border:#e2dfd9;--shadow:0 4px 24px rgba(26,25,23,.07);--shadow-lg:0 16px 64px rgba(26,25,23,.12);}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none;}
+#cur{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
+#cur-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s,opacity .3s;opacity:.5;}
+body.hov #cur{width:16px;height:16px;background:var(--accent2);}
+body.hov #cur-ring{width:54px;height:54px;border-color:var(--accent2);opacity:.8;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;background:rgba(255,255,255,0);transition:background .4s,box-shadow .4s,padding .4s;}
+nav.scrolled{background:rgba(255,255,255,.92);box-shadow:0 1px 0 var(--border);backdrop-filter:blur(20px);padding:1rem 4rem;}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;letter-spacing:-.02em;color:var(--text);text-decoration:none;position:relative;}
+.logo em{color:var(--accent);font-style:normal;}
+.logo::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s;}
+.logo:hover::after{width:100%;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);text-decoration:none;position:relative;transition:color .2s;}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s;}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active{color:var(--accent);}
+.nav-links a.active::after{width:100%;}
+.nav-cta{font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--text);color:var(--white);border:none;padding:.7rem 1.5rem;cursor:pointer;position:relative;overflow:hidden;transition:color .3s;}
+.nav-cta::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.nav-cta:hover::before{transform:translateX(0);}
+.nav-cta span{position:relative;z-index:1;}
+
+#hero{min-height:50vh;padding:10rem 4rem 4rem;background:var(--off);position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,var(--mid) 1px,transparent 1px);background-size:32px 32px;opacity:.3;pointer-events:none;}
+.hb{position:absolute;border-radius:50%;filter:blur(70px);}
+.hb1{width:440px;height:440px;background:radial-gradient(circle,rgba(232,80,10,.1) 0%,transparent 70%);top:-100px;right:-80px;animation:bf 10s ease-in-out infinite;}
+.hb2{width:260px;height:260px;background:radial-gradient(circle,rgba(245,166,35,.07) 0%,transparent 70%);bottom:40px;left:30%;animation:bf 14s ease-in-out 3s infinite;}
+@keyframes bf{0%,100%{transform:translate(0,0)}50%{transform:translate(16px,-18px)}}
+.hero-inner{position:relative;z-index:1;max-width:800px;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem;opacity:0;transform:translateY(14px);animation:fUp .6s ease forwards .3s;}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{color:var(--mid);}
+@keyframes fUp{to{opacity:1;transform:translateY(0);}}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:900;line-height:1;letter-spacing:-.03em;margin-bottom:1.2rem;}
+.hero-title .line{display:block;overflow:hidden;}
+.hero-title .line span{display:block;opacity:0;transform:translateY(100%);animation:lUp .8s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-title .line:nth-child(1) span{animation-delay:.4s;}
+.hero-title .line:nth-child(2) span{animation-delay:.55s;}
+@keyframes lUp{to{opacity:1;transform:translateY(0);}}
+.hero-title em{color:var(--accent);font-style:italic;}
+.hero-sub{font-size:1rem;color:var(--text2);font-weight:300;max-width:480px;line-height:1.8;opacity:0;animation:fUp .7s ease forwards .9s;}
+
+.ticker{background:var(--text);padding:.7rem 0;overflow:hidden;white-space:nowrap;}
+.ticker-in{display:inline-flex;animation:tickr 24s linear infinite;}
+.ticker:hover .ticker-in{animation-play-state:paused;}
+.ticker-in span{font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:0 2rem;}
+.ticker-in .dot{color:var(--accent);padding:0;font-size:.7rem;}
+@keyframes tickr{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.reveal.vis{opacity:1;transform:none;}
+
+/* PORTFOLIO SECTION */
+#portfolio{padding:5rem 4rem;}
+.port-controls{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:3.5rem;}
+.filter-pills{display:flex;gap:.5rem;flex-wrap:wrap;}
+.pill{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:.45rem 1.1rem;border-radius:100px;border:1.5px solid var(--border);color:var(--text2);background:var(--white);cursor:pointer;transition:color .2s,background .2s,border-color .2s,transform .15s;}
+.pill:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px);}
+.pill.active{background:var(--text);color:var(--white);border-color:var(--text);}
+.view-toggle{display:flex;gap:.5rem;}
+.vbtn{width:36px;height:36px;border:1.5px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;color:var(--mid);transition:all .2s;}
+.vbtn.active,.vbtn:hover{border-color:var(--accent);color:var(--accent);}
+
+.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;transition:all .3s;}
+.port-grid.list-view{grid-template-columns:1fr;}
+
+.pcard{border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:var(--white);cursor:pointer;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s;display:flex;flex-direction:column;}
+.pcard:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:rgba(232,80,10,.2);}
+.port-grid.list-view .pcard{flex-direction:row;height:160px;}
+.port-grid.list-view .pcard-thumb{width:220px;flex-shrink:0;height:100%;}
+.port-grid.list-view .pcard-thumb .pimg{height:100%;aspect-ratio:unset;}
+
+.pcard-thumb{position:relative;overflow:hidden;}
+.pimg{width:100%;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:3.5rem;transition:transform .6s cubic-bezier(.16,1,.3,1);}
+.pcard:hover .pimg{transform:scale(1.06);}
+.pimg.real{padding:0;background:var(--off);}
+.pimg.real img{width:100%;height:100%;object-fit:cover;display:block;}
+.pimg.real.contain img{object-fit:contain;padding:1.5rem;background:var(--white);}
+.featured-badge{position:absolute;top:1rem;left:1rem;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:var(--white);padding:.3rem .7rem;border-radius:100px;z-index:2;}
+.pg1{background:linear-gradient(135deg,#fdf0e8,#f5c4a0);}
+.pg2{background:linear-gradient(135deg,#e8edf8,#b8cdf0);}
+.pg3{background:linear-gradient(135deg,#f0f8e8,#c4e4a4);}
+.pg4{background:linear-gradient(135deg,#f8e8f5,#e0acd8);}
+.pg5{background:linear-gradient(135deg,#f8f0e8,#e8d0a8);}
+.pg6{background:linear-gradient(135deg,#e8f5e8,#a8e0d4);}
+.pg7{background:linear-gradient(135deg,#f8e8e8,#f0b0b0);}
+.pg8{background:linear-gradient(135deg,#f0e8f8,#c8a8e8);}
+.pg9{background:linear-gradient(135deg,#e8f5e8,#a8d8a8);}
+.pg10{background:linear-gradient(135deg,#f5f5e8,#dcd8a8);}
+.pg11{background:linear-gradient(135deg,#e8f0f8,#a8c4e8);}
+.pg12{background:linear-gradient(135deg,#f8ede8,#f0c8a8);}
+
+.pcard-overlay{position:absolute;inset:0;background:rgba(26,25,23,0);display:flex;align-items:center;justify-content:center;transition:background .35s;}
+.pcard:hover .pcard-overlay{background:rgba(26,25,23,.55);}
+.pcard-overlay-inner{opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;text-align:center;}
+.pcard:hover .pcard-overlay-inner{opacity:1;transform:translateY(0);}
+.view-proj{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white);border:1px solid rgba(255,255,255,.5);padding:.5rem 1.2rem;border-radius:100px;}
+
+.pcard-body{padding:1.4rem 1.5rem;flex:1;display:flex;flex-direction:column;justify-content:space-between;}
+.pcard-meta{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;flex-wrap:wrap;}
+.pcat{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--alight);border:1px solid rgba(232,80,10,.15);padding:.2rem .55rem;border-radius:100px;}
+.pyear{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.06em;color:var(--mid);}
+.ptitle{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;letter-spacing:-.02em;color:var(--text);margin-bottom:.4rem;line-height:1.2;}
+.pdesc{font-size:.8rem;color:var(--text2);font-weight:300;line-height:1.6;}
+.pcard-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border);}
+.pclient{font-size:.78rem;font-weight:500;color:var(--text2);}
+.plink{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;transition:gap .2s;display:flex;align-items:center;gap:.3rem;}
+.plink:hover{gap:.6rem;}
+.no-results{display:none;text-align:center;padding:5rem 2rem;grid-column:1/-1;}
+.no-results p{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--mid);}
+
+/* CTA */
+#cta{background:var(--off);padding:6rem 4rem;text-align:center;border-top:1px solid var(--border);}
+.cta-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--alight);color:var(--accent);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.4rem 1rem;border-radius:100px;margin-bottom:2rem;}
+.cta-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;color:var(--text);margin-bottom:1rem;}
+.cta-title em{color:var(--accent);font-style:italic;}
+.cta-sub{font-size:.95rem;color:var(--text2);font-weight:300;max-width:440px;margin:0 auto 2.5rem;line-height:1.8;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--text);color:var(--white);padding:.9rem 2rem;text-decoration:none;border-radius:8px;position:relative;overflow:hidden;transition:color .3s;cursor:pointer;border:none;}
+.btn-primary::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.btn-primary:hover::before{transform:translateX(0);}
+.btn-primary span,.btn-primary svg{position:relative;z-index:1;}
+.btn-primary svg{width:16px;height:16px;transition:transform .3s;}
+.btn-primary:hover svg{transform:translateX(4px);}
+.btn-outline{display:inline-flex;align-items:center;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text);padding:.9rem 2rem;text-decoration:none;border-radius:8px;border:1.5px solid var(--border);position:relative;overflow:hidden;transition:color .3s,border-color .3s;cursor:pointer;}
+.btn-outline::before{content:'';position:absolute;inset:0;background:var(--text);transform:translateY(101%);transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.btn-outline:hover{color:var(--white);border-color:var(--text);}
+.btn-outline:hover::before{transform:translateY(0);}
+.btn-outline span{position:relative;z-index:1;}
+
+footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.flogo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--white);}
+.flogo em{color:var(--accent);font-style:normal;}
+.fcopy{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:rgba(255,255,255,.3);}
+.fsoc{display:flex;gap:.7rem;}
+.sbtn{width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:.75rem;color:rgba(255,255,255,.35);cursor:pointer;text-decoration:none;transition:border-color .3s,color .3s,background .3s,transform .3s;}
+.sbtn:hover{border-color:var(--accent);color:var(--white);background:var(--accent);transform:translateY(-4px);}
+
+@media(max-width:960px){nav{padding:1.2rem 1.5rem;}.nav-links{display:none;}#hero,#portfolio,#cta{padding:4rem 1.5rem;}#hero{padding-top:8rem;}.port-grid{grid-template-columns:1fr 1fr;}.port-grid.list-view{grid-template-columns:1fr;}.port-grid.list-view .pcard{flex-direction:column;height:auto;}.port-grid.list-view .pcard-thumb{width:100%;height:auto;}.port-grid.list-view .pcard-thumb .pimg{height:auto;aspect-ratio:4/3;}body{cursor:default;}#cur,#cur-ring{display:none;}}
+@media(max-width:600px){.port-grid,.port-grid.list-view{grid-template-columns:1fr;}}
+@media(max-width:640px){
+  body{font-size:15px;}
+  nav{padding:.75rem 1rem;}
+  nav.scrolled{padding:.65rem 1rem;}
+  .logo{font-size:1.05rem;}
+  .nav-cta{padding:.65rem .85rem;font-size:.68rem;}
+  #hero{padding:7.5rem 1rem 3rem;min-height:auto;}
+  .hb1{width:220px;height:220px;}
+  .hb2{width:150px;height:150px;}
+  .breadcrumb{font-size:.66rem;margin-bottom:1.1rem;}
+  .hero-title{font-size:clamp(2.2rem,11vw,3rem);}
+  .hero-sub{font-size:.9rem;line-height:1.7;}
+  .ticker-in span{font-size:.72rem;padding:0 1.1rem;}
+  #portfolio,#cta{padding:3.5rem 1rem;}
+  .port-controls{margin-bottom:2rem;gap:1rem;}
+  .filter-pills{gap:.4rem;}
+  .pill{font-size:.62rem;padding:.4rem .85rem;}
+  .view-toggle{align-self:flex-end;}
+  .pcard-body{padding:1.1rem 1.2rem;}
+  .ptitle{font-size:.98rem;}
+  .pdesc{font-size:.78rem;}
+  .pcard-footer{margin-top:.6rem;padding-top:.6rem;}
+  .cta-title{font-size:clamp(1.8rem,9vw,2.6rem);}
+  .cta-sub{font-size:.88rem;}
+  .cta-btns{display:grid;grid-template-columns:1fr;gap:.75rem;}
+  .cta-btns .btn-primary,.cta-btns .btn-outline{width:100%;justify-content:center;}
+  footer{padding:2rem 1rem;flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:380px){
+  .logo{font-size:.98rem;}
+  .logo img{width:32px;height:32px;}
+  .hero-title{font-size:clamp(2rem,12vw,2.6rem);}
+}
+.logo,.flogo{display:inline-flex;align-items:center;gap:.55rem;}
+.logo img,.flogo img{width:44px;height:44px;border-radius:9px;object-fit:cover;box-shadow:0 6px 18px rgba(232,80,10,.18);flex:0 0 auto;}
+.flogo img{width:38px;height:38px;}
+.logo span,.flogo span{display:inline-block;}
+
+/* ── MOBILE MENU ── */
+.nav-toggle{display:none;}
+@media(max-width:960px){
+  .nav-toggle{
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    gap:5px;width:38px;height:38px;background:none;border:none;cursor:pointer;
+    z-index:201;flex:0 0 auto;order:3;
+  }
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s ease,opacity .3s ease;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .nav-links{
+    display:flex !important;position:fixed;top:0;right:0;height:100vh;height:100dvh;width:78%;max-width:320px;
+    background:var(--white);flex-direction:column;align-items:flex-start;
+    padding:6.5rem 2rem 2rem;gap:0;box-shadow:-8px 0 40px rgba(26,25,23,.18);
+    transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);
+    z-index:200;overflow-y:auto;
+  }
+  .nav-links.open{transform:translateX(0);}
+  .nav-links li{width:100%;border-bottom:1px solid var(--border);}
+  .nav-links a{display:block;padding:1rem 0;font-size:.95rem;}
+  .nav-links a::after{display:none;}
+
+  .nav-overlay{
+    display:none;position:fixed;inset:0;background:rgba(26,25,23,.45);
+    z-index:150;opacity:0;transition:opacity .3s ease;
+  }
+  .nav-overlay.open{display:block;opacity:1;}
+  body.menu-open{overflow:hidden;}
+  .nav-back{order:2;}
+}
+
+
+/* Mobile layout hardening */
+@media(max-width:960px){
+  html,
+  body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+  body{position:relative;}
+  body > *,
+  main,
+  section,
+  footer,
+  #hero,
+  .ticker{
+    max-width:100%;
+    overflow-x:clip;
+  }
+  img,
+  svg,
+  video,
+  canvas{max-width:100%;}
+  nav,
+  nav.scrolled{
+    min-height:64px;
+    padding:.75rem 1rem;
+    gap:.75rem;
+    z-index:10000;
+    background:rgba(255,255,255,.96);
+    box-shadow:0 1px 0 var(--border);
+    backdrop-filter:blur(18px);
+  }
+  .logo{min-width:0;flex:1;overflow:hidden;}
+  .logo span{line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  nav .nav-cta,
+  nav .nav-back{display:none;}
+  .nav-links{z-index:10001;}
+  .nav-toggle{z-index:10002;margin-left:auto;}
+  .nav-overlay{z-index:9999;}
+  .hero-title,
+  .sec-title,
+  .cta-title{
+    max-width:100%;
+    overflow-wrap:break-word;
+    word-break:normal;
+  }
+  .hero-title{font-size:clamp(2rem,10.5vw,2.85rem)!important;}
+  .hero-title .line,
+  .hero-title .line span{max-width:100%;}
+  .reveal.rl,
+  .reveal.rr{transform:translateY(40px);}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur-ring"></div>
+
+<nav id="nav">
+  <a href="index.html" class="logo"><img src="image_logo.png" alt="Vexora Designs logo"><span>Vexora <em>Designs</em></span></a>
+  <ul id="navLinks" class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html" class="active">Work</a></li>
+    <li><a href="blog.html">Insights</a></li>
+    <li><a href="order.html">Order</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+  <button class="nav-cta" onclick="window.location='order.html'"><span>Get a Quote</span></button>
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<section id="hero">
+  <div class="hero-dots"></div>
+  <div class="hb hb1" id="b1"></div><div class="hb hb2" id="b2"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Our Work</div>
+    <h1 class="hero-title">
+      <div class="line"><span>Work we're</span></div>
+      <div class="line"><span>proud to <em>show off.</em></span></div>
+    </h1>
+    <p class="hero-sub">150+ projects across branding, social media, print, and web. Browse by category or scroll through everything.</p>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-in">
+  <span>Logo & Branding</span><span class="dot"> ✦ </span><span>Social Media</span><span class="dot"> ✦ </span><span>Print & Packaging</span><span class="dot"> ✦ </span><span>Web & UI</span><span class="dot"> ✦ </span><span>150+ Projects</span><span class="dot"> ✦ </span><span>80+ Clients</span><span class="dot"> ✦ </span>
+  <span>Logo & Branding</span><span class="dot"> ✦ </span><span>Social Media</span><span class="dot"> ✦ </span><span>Print & Packaging</span><span class="dot"> ✦ </span><span>Web & UI</span><span class="dot"> ✦ </span><span>150+ Projects</span><span class="dot"> ✦ </span><span>80+ Clients</span><span class="dot"> ✦ </span>
+</div></div>
+
+<section id="portfolio">
+  <div class="port-controls reveal">
+    <div class="filter-pills" id="filters">
+      <button class="pill active" data-cat="all">All Projects</button>
+      <button class="pill" data-cat="branding">Branding</button>
+      <button class="pill" data-cat="social">Social Media</button>
+      <button class="pill" data-cat="print">Print</button>
+    </div>
+    <div class="view-toggle">
+      <button class="vbtn active" id="gridBtn" onclick="setView('grid')" title="Grid view">⊞</button>
+      <button class="vbtn" id="listBtn" onclick="setView('list')" title="List view">☰</button>
+    </div>
+  </div>
+
+  <div class="port-grid" id="portGrid">
+
+    <div class="pcard reveal" data-cat="branding" style="transition-delay:.0s">
+      <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real"><img src="images/coffee.png" alt="Orora Roasters coffee brand identity on packaging"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Orora Roasters — Coffee Brand Identity</div><p class="pdesc">Minimalist logomark and full packaging system — wood engraving, fabric, and coffee bag mockups.</p></div><div class="pcard-footer"><span class="pclient">Orora Roasters</span><a href="#" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="branding" style="transition-delay:.06s">
+      <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="images/quetta_1.png" alt="Quetta Logistics logo design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Quetta Logistics — Logo Design</div><p class="pdesc">Clean logomark for a logistics company — a truck formed from a directional arrow, simple navy palette.</p></div><div class="pcard-footer"><span class="pclient">Quetta Logistics</span><a href="#" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="branding" style="transition-delay:.12s">
+      <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="images/zia_tech.png" alt="Zia Tech logo design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Zia Tech — Logo Design</div><p class="pdesc">A circuit-pattern "Z" logomark with a wifi signal accent for a fiber & smart solutions company.</p></div><div class="pcard-footer"><span class="pclient">Zia Tech</span><a href="#" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="branding" style="transition-delay:.0s">
+      <div class="pcard-thumb"><div class="pimg real"><img src="images/quetta.png" alt="Quetta Logistics stationery mockup"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Quetta Logistics — Stationery Mockup</div><p class="pdesc">Letterhead, envelope, and business card mockups applying the logo across a navy & grey brand system.</p></div><div class="pcard-footer"><span class="pclient">Quetta Logistics</span><a href="#" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="social" style="transition-delay:.08s">
+      <div class="pcard-thumb"><div class="pimg real"><img src="images/karachi_burger.png" alt="The Big Quetta Burger social media ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Social Media</span><span class="pyear">2025</span></div><div class="ptitle">The Big Quetta Burger — Promo Ad</div><p class="pdesc">Vertical story-format food promo design with bold typography and product photography for a burger launch.</p></div><div class="pcard-footer"><span class="pclient">Local F&B Client</span><a href="#" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="social" style="transition-delay:.16s">
+      <div class="pcard-thumb"><div class="pimg real"><img src="images/20_off.png" alt="Deal of the Week 20% off promo design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Social Media</span><span class="pyear">2025</span></div><div class="ptitle">Deal of the Week — Promo Graphic</div><p class="pdesc">High-contrast sale announcement design built for square-format social posts and story ads.</p></div><div class="pcard-footer"><span class="pclient">Retail Client</span><a href="#" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="social" style="transition-delay:.04s">
+      <div class="pcard-thumb"><div class="pimg real"><img src="images/five_star.png" alt="Five star customer review social post design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Social Media</span><span class="pyear">2025</span></div><div class="ptitle">Customer Review — Testimonial Post</div><p class="pdesc">Geometric testimonial template for sharing customer reviews on Instagram and Facebook.</p></div><div class="pcard-footer"><span class="pclient">Restaurant Client</span><a href="#" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="print" style="transition-delay:.12s">
+      <div class="pcard-thumb"><div class="pimg real"><img src="images/resturant_poster.png" alt="Dubai restaurant fresh food banner ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2024</span></div><div class="ptitle">Fresh Food — Restaurant Banner</div><p class="pdesc">Wide-format promotional banner for a Dubai restaurant, featuring a 30% off campaign layout.</p></div><div class="pcard-footer"><span class="pclient">Dubai Restaurant</span><a href="#" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="print" style="transition-delay:.2s">
+      <div class="pcard-thumb"><div class="pimg real"><img src="images/brucher_1.png" alt="Corporate brochure design template"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2024</span></div><div class="ptitle">Corporate Brochure — Layout Concept</div><p class="pdesc">Tri-fold brochure layout exploring a bold geometric arrow motif in navy and black.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="#" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="no-results" id="noResults"><p>No projects in this category yet.</p></div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="reveal">
+    <div class="cta-badge">Like what you see?</div>
+    <h2 class="cta-title">Let's add your brand to <em>the portfolio.</em></h2>
+    <p class="cta-sub">Every project starts with a conversation. Tell us what you need and we'll take it from there.</p>
+    <div class="cta-btns">
+      <a href="order.html" class="btn-primary"><span>Start Your Project</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="services.html" class="btn-outline"><span>View Pricing</span></a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="flogo"><img src="image_logo.png" alt="Vexora Designs logo"><span>Vexora <em>Designs</em></span></div><div class="fcopy">© 2025 Vexora Designs. Quetta, Pakistan.</div><div class="fsoc"><a class="sbtn" href="#">ig</a><a class="sbtn" href="#">be</a><a class="sbtn" href="#">wa</a><a class="sbtn" href="#">in</a></div></footer>
+
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+!function aR(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(aR);}();
+document.querySelectorAll('a,button,.pcard,.pill').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));});
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+document.addEventListener('mousemove',e=>{const xr=(e.clientX/innerWidth-.5)*20,yr=(e.clientY/innerHeight-.5)*20;const b1=document.getElementById('b1'),b2=document.getElementById('b2');if(b1)b1.style.transform=`translate(${xr}px,${yr}px)`;if(b2)b2.style.transform=`translate(${-xr*.6}px,${-yr*.6}px)`;});
+const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+let activeCat='all';
+document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{activeCat=p.dataset.cat;document.querySelectorAll('.pill').forEach(x=>x.classList.toggle('active',x===p));applyFilter();}));
+function applyFilter(){const cards=[...document.querySelectorAll('.pcard')];let v=0;cards.forEach(c=>{const show=activeCat==='all'||c.dataset.cat===activeCat;c.style.display=show?'flex':'none';if(show)v++;});document.getElementById('noResults').style.display=v===0?'block':'none';}
+function setView(v){const g=document.getElementById('portGrid');g.classList.toggle('list-view',v==='list');document.getElementById('gridBtn').classList.toggle('active',v==='grid');document.getElementById('listBtn').classList.toggle('active',v==='list');}
+document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.2}px)`;});b.addEventListener('mouseleave',()=>b.style.transform='');});
+document.querySelectorAll('.pcard').forEach(c=>{c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*4}deg) rotateX(${-y*4}deg) translateY(-8px)`;});c.addEventListener('mouseleave',()=>c.style.transform='');});
+
+/* MOBILE MENU TOGGLE */
+!function(){
+  const navToggle=document.getElementById('navToggle');
+  const navLinksEl=document.querySelector('.nav-links');
+  const navOverlay=document.getElementById('navOverlay');
+  if(!navToggle||!navLinksEl||!navOverlay) return;
+  function closeMenu(){
+    navToggle.classList.remove('open');
+    navLinksEl.classList.remove('open');
+    navOverlay.classList.remove('open');
+    navToggle.setAttribute('aria-expanded','false');
+    document.body.classList.remove('menu-open');
+  }
+  navToggle.addEventListener('click',()=>{
+    const isOpen=navLinksEl.classList.toggle('open');
+    navToggle.classList.toggle('open',isOpen);
+    navOverlay.classList.toggle('open',isOpen);
+    navToggle.setAttribute('aria-expanded',String(isOpen));
+    document.body.classList.toggle('menu-open',isOpen);
+  });
+  navOverlay.addEventListener('click',closeMenu);
+  navLinksEl.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+  window.addEventListener('resize',()=>{ if(innerWidth>960) closeMenu(); });
+}();
+
+</script>
+</body>
+</html>
+```
