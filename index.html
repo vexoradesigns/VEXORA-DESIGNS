@@ -1204,7 +1204,7 @@ textarea:focus-visible {
   <div class="fsoc">
     <a class="sbtn" href="#" title="Instagram">ig</a>
     <a class="sbtn" href="#" title="Behance">be</a>
-    <a class="sbtn" href="#" title="WhatsApp">wa</a>
+    <a class="sbtn" href="https://wa.me/93776995101" title="WhatsApp" target="_blank" rel="noopener">wa</a>
     <a class="sbtn" href="#" title="LinkedIn">in</a>
   </div>
 </footer>
@@ -1299,16 +1299,42 @@ document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta,.sub-btn').forEach
 });
 
 /* FORM */
+const WEB3FORMS_ACCESS_KEY = '0783c2f1-d0b1-4ee0-9160-2e86d15beaeb';
+
 function doSub(e){
   e.preventDefault();
   const btn=document.querySelector('.sub-btn'), sp=btn.querySelector('span');
   sp.textContent='Sending…'; btn.style.pointerEvents='none';
-  setTimeout(()=>{
-    document.getElementById('cForm').reset();
-    document.getElementById('okMsg').style.display='block';
-    sp.textContent='✓ Sent!';
-    setTimeout(()=>{ sp.textContent='Send Message'; btn.style.pointerEvents=''; },3000);
-  },1200);
+
+  const payload = {
+    access_key: WEB3FORMS_ACCESS_KEY,
+    subject: `New Website Inquiry — ${document.getElementById('name').value || 'Unnamed'}`,
+    from_name: 'Vexora Designs — Homepage Contact Form',
+    'Name': document.getElementById('name').value,
+    'Email': document.getElementById('email').value,
+    'Phone / WhatsApp': document.getElementById('phone').value,
+    'Service Needed': document.getElementById('service').value,
+    'Budget Range': document.getElementById('budget').value,
+    'Project Details': document.getElementById('project').value,
+  };
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(payload)
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (!data.success) throw new Error(data.message || 'Submission failed');
+      document.getElementById('cForm').reset();
+      document.getElementById('okMsg').style.display='block';
+      sp.textContent='✓ Sent!';
+      setTimeout(()=>{ sp.textContent='Send Message'; btn.style.pointerEvents=''; },3000);
+    })
+    .catch(() => {
+      alert("Something went wrong sending your message. Please try again, or message us directly on WhatsApp.");
+      sp.textContent='Send Message'; btn.style.pointerEvents='';
+    });
 }
 
 /* MOBILE MENU TOGGLE */
@@ -1337,6 +1363,25 @@ function doSub(e){
 }();
 
 </script>
+<style>
+.wa-float{position:fixed;bottom:24px;right:24px;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:9999;box-shadow:0 6px 20px rgba(37,211,102,.45);text-decoration:none;transition:transform .25s ease;}
+.wa-float:hover{transform:scale(1.08);}
+.wa-float svg{width:29px;height:29px;fill:#fff;position:relative;z-index:2;}
+.wa-float::before{content:'';position:absolute;inset:0;border-radius:50%;background:#25D366;animation:waPulse 2.4s ease-out infinite;z-index:1;}
+@keyframes waPulse{0%{transform:scale(1);opacity:.55;}100%{transform:scale(1.9);opacity:0;}}
+.wa-tip{position:fixed;bottom:38px;right:92px;background:#1a1917;color:#fff;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;padding:.55rem .9rem;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transform:translateX(8px);transition:opacity .25s ease,transform .25s ease;z-index:9999;}
+.wa-float:hover + .wa-tip{opacity:1;transform:translateX(0);}
+@media(max-width:640px){
+  .wa-float{width:52px;height:52px;bottom:18px;right:18px;}
+  .wa-float svg{width:26px;height:26px;}
+  .wa-tip{display:none;}
+}
+</style>
+<a class="wa-float" href="https://wa.me/93776995101?text=Hi%20Vexora%20Designs%2C%20I%27d%20like%20to%20ask%20about%20a%20project." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.9.529 3.68 1.446 5.196L2 22l4.933-1.394A9.947 9.947 0 0012 22c5.523 0 10-4.477 10-10S17.524 2 12.001 2zm0 18.09a8.06 8.06 0 01-4.36-1.28l-.313-.187-3.05.86.833-2.995-.204-.323A8.077 8.077 0 013.91 12c0-4.46 3.63-8.09 8.091-8.09 4.46 0 8.09 3.63 8.09 8.09 0 4.46-3.63 8.09-8.09 8.09z"/></svg>
+</a>
+<span class="wa-tip">Chat with us</span>
+
 </body>
 </html>
 

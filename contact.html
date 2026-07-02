@@ -349,16 +349,16 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
       <p class="form-sub">Tell us about your project — we'll reply with a clear proposal within 24 hours.</p>
       <form class="con-form" id="cForm">
         <div class="form-row">
-          <div class="fg"><label>Your Name *</label><input type="text" placeholder="Ahmed Hassan" required></div>
-          <div class="fg"><label>Company / Brand</label><input type="text" placeholder="Your Company"></div>
+          <div class="fg"><label>Your Name *</label><input type="text" id="cf-name" placeholder="Ahmed Hassan" required></div>
+          <div class="fg"><label>Company / Brand</label><input type="text" id="cf-company" placeholder="Your Company"></div>
         </div>
         <div class="form-row">
-          <div class="fg"><label>Email Address *</label><input type="email" placeholder="you@example.com" required></div>
-          <div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+92 300 0000000"></div>
+          <div class="fg"><label>Email Address *</label><input type="email" id="cf-email" placeholder="you@example.com" required></div>
+          <div class="fg"><label>Phone / WhatsApp</label><input type="tel" id="cf-phone" placeholder="+92 300 0000000"></div>
         </div>
         <div class="form-row">
           <div class="fg"><label>Service Needed *</label>
-            <select required>
+            <select id="cf-service" required>
               <option value="">— What do you need? —</option>
               <option>Logo & Branding</option>
               <option>Social Media Design</option>
@@ -369,7 +369,7 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
             </select>
           </div>
           <div class="fg"><label>Budget Range</label>
-            <select>
+            <select id="cf-budget">
               <option value="">— Your budget —</option>
               <option>Under $200</option>
               <option>$200 – $500</option>
@@ -380,7 +380,7 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
           </div>
         </div>
         <div class="fg"><label>Timeline</label>
-          <select>
+          <select id="cf-timeline">
             <option value="">— When do you need it? —</option>
             <option>ASAP (Rush)</option>
             <option>Within 1 week</option>
@@ -395,7 +395,7 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
           <span class="char-count" id="charCount">0 / 1000</span>
         </div>
         <div class="fg"><label>How Did You Find Us?</label>
-          <select>
+          <select id="cf-source">
             <option value="">— Optional —</option>
             <option>Google Search</option>
             <option>Instagram</option>
@@ -439,7 +439,7 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
   </div>
 </section>
 
-<footer><div class="flogo"><img src="image_logo.png" alt="Vexora Designs Logo"><span>Vexora <em>Designs</em></span></div><div class="fcopy">© 2025 Vexora Designs. Quetta, Pakistan.</div><div class="fsoc"><a class="sbtn" href="#">ig</a><a class="sbtn" href="#">be</a><a class="sbtn" href="#">wa</a><a class="sbtn" href="#">in</a></div></footer>
+<footer><div class="flogo"><img src="image_logo.png" alt="Vexora Designs Logo"><span>Vexora <em>Designs</em></span></div><div class="fcopy">© 2025 Vexora Designs. Quetta, Pakistan.</div><div class="fsoc"><a class="sbtn" href="#">ig</a><a class="sbtn" href="#">be</a><a class="sbtn" href="https://wa.me/93776995101" target="_blank" rel="noopener">wa</a><a class="sbtn" href="#">in</a></div></footer>
 
 <script>
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
@@ -452,7 +452,42 @@ document.addEventListener('mousemove',e=>{const xr=(e.clientX/innerWidth-.5)*20,
 const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 function updateCount(){const a=document.getElementById('msgArea'),c=document.getElementById('charCount');if(a&&c)c.textContent=`${a.value.length} / 1000`;}
-function doSub(e){e.preventDefault();const btn=document.querySelector('.sub-btn');if(!btn)return;const sp=btn.querySelector('span');if(sp)sp.textContent='Sending…';btn.style.pointerEvents='none';setTimeout(()=>{const form=document.getElementById('cForm');if(form)form.reset();const count=document.getElementById('charCount');if(count)count.textContent='0 / 1000';const ok=document.getElementById('okMsg');if(ok)ok.style.display='block';if(sp)sp.textContent='✓ Sent!';setTimeout(()=>{if(sp)sp.textContent='Send Message';btn.style.pointerEvents='';},4000);},1400);}
+const WEB3FORMS_ACCESS_KEY = '0783c2f1-d0b1-4ee0-9160-2e86d15beaeb';
+function doSub(e){
+  e.preventDefault();
+  const btn=document.querySelector('.sub-btn');if(!btn)return;
+  const sp=btn.querySelector('span');if(sp)sp.textContent='Sending…';
+  btn.style.pointerEvents='none';
+  const val=id=>{const el=document.getElementById(id);return el?el.value:'';};
+  const payload={
+    access_key: WEB3FORMS_ACCESS_KEY,
+    subject: `New Website Inquiry — ${val('cf-name')||'Unnamed'}`,
+    from_name: 'Vexora Designs — Contact Page Form',
+    'Name': val('cf-name'),
+    'Company / Brand': val('cf-company'),
+    'Email': val('cf-email'),
+    'Phone / WhatsApp': val('cf-phone'),
+    'Service Needed': val('cf-service'),
+    'Budget Range': val('cf-budget'),
+    'Timeline': val('cf-timeline'),
+    'Project Details': val('msgArea'),
+    'How They Found Us': val('cf-source'),
+  };
+  fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
+    .then(res=>res.json())
+    .then(data=>{
+      if(!data.success) throw new Error(data.message||'Submission failed');
+      const form=document.getElementById('cForm');if(form)form.reset();
+      const count=document.getElementById('charCount');if(count)count.textContent='0 / 1000';
+      const ok=document.getElementById('okMsg');if(ok)ok.style.display='block';
+      if(sp)sp.textContent='✓ Sent!';
+      setTimeout(()=>{if(sp)sp.textContent='Send Message';btn.style.pointerEvents='';},4000);
+    })
+    .catch(()=>{
+      alert("Something went wrong sending your message. Please try again, or message us directly on WhatsApp.");
+      if(sp)sp.textContent='Send Message';btn.style.pointerEvents='';
+    });
+}
 document.querySelectorAll('.sub-btn,.nav-cta').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.2}px)`;});b.addEventListener('mouseleave',()=>b.style.transform='');});
 function toggleFaq(q){const item=q.closest('.faq-item');if(!item)return;const was=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open');}
 
@@ -505,5 +540,24 @@ document.addEventListener('DOMContentLoaded',initContactPage);
 }();
 
 </script>
+<style>
+.wa-float{position:fixed;bottom:24px;right:24px;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:9999;box-shadow:0 6px 20px rgba(37,211,102,.45);text-decoration:none;transition:transform .25s ease;}
+.wa-float:hover{transform:scale(1.08);}
+.wa-float svg{width:29px;height:29px;fill:#fff;position:relative;z-index:2;}
+.wa-float::before{content:'';position:absolute;inset:0;border-radius:50%;background:#25D366;animation:waPulse 2.4s ease-out infinite;z-index:1;}
+@keyframes waPulse{0%{transform:scale(1);opacity:.55;}100%{transform:scale(1.9);opacity:0;}}
+.wa-tip{position:fixed;bottom:38px;right:92px;background:#1a1917;color:#fff;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;padding:.55rem .9rem;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transform:translateX(8px);transition:opacity .25s ease,transform .25s ease;z-index:9999;}
+.wa-float:hover + .wa-tip{opacity:1;transform:translateX(0);}
+@media(max-width:640px){
+  .wa-float{width:52px;height:52px;bottom:18px;right:18px;}
+  .wa-float svg{width:26px;height:26px;}
+  .wa-tip{display:none;}
+}
+</style>
+<a class="wa-float" href="https://wa.me/93776995101?text=Hi%20Vexora%20Designs%2C%20I%27d%20like%20to%20ask%20about%20a%20project." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.9.529 3.68 1.446 5.196L2 22l4.933-1.394A9.947 9.947 0 0012 22c5.523 0 10-4.477 10-10S17.524 2 12.001 2zm0 18.09a8.06 8.06 0 01-4.36-1.28l-.313-.187-3.05.86.833-2.995-.204-.323A8.077 8.077 0 013.91 12c0-4.46 3.63-8.09 8.091-8.09 4.46 0 8.09 3.63 8.09 8.09 0 4.46-3.63 8.09-8.09 8.09z"/></svg>
+</a>
+<span class="wa-tip">Chat with us</span>
+
 </body>
 </html>
