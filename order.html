@@ -674,6 +674,15 @@ select:focus-visible{
   }
 
   function validateStep(step){
+    // Special validation for step 1: must select at least one service
+    if (step === 1) {
+      if (state.selectedServices.size === 0) {
+        alert('Please select at least one service before proceeding.');
+        return false;
+      }
+      return true;
+    }
+    
     const fields = requiredStepFields[step] || [];
     const invalid = [];
     fields.forEach(id => {
@@ -828,7 +837,7 @@ select:focus-visible{
     const target = event.currentTarget;
     const step = Number(target.dataset.stepTarget);
     if (!step || Number.isNaN(step)) return;
-    if (step > state.currentStep && !validateStep(step)) return;
+    if (step > state.currentStep && !validateStep(state.currentStep)) return;
     setActiveStep(step);
   }
 
