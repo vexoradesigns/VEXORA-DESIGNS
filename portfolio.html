@@ -9,6 +9,7 @@
 <link rel="icon" type="image/png" href="image_logo.png">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+img,svg{max-width:100%;display:block;}
 :root{--white:#ffffff;--off:#f7f6f3;--mid:#c8c5be;--text:#1a1917;--text2:#5a5650;--accent:#e8500a;--accent2:#f5a623;--alight:#fff0ea;--border:#e2dfd9;--shadow:0 4px 24px rgba(26,25,23,.07);--shadow-lg:0 16px 64px rgba(26,25,23,.12);}
 html{scroll-behavior:smooth;}
 body{background:var(--white);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none;}
@@ -197,7 +198,7 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
 @media(max-width:960px){
   .nav-toggle{
     display:flex;flex-direction:column;justify-content:center;align-items:center;
-    gap:5px;width:38px;height:38px;background:none;border:none;cursor:pointer;
+    gap:5px;width:44px;height:44px;background:none;border:none;cursor:pointer;
     z-index:201;flex:0 0 auto;order:3;
   }
   .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s ease,opacity .3s ease;}
@@ -395,7 +396,7 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
   </div>
 </section>
 
-<footer><div class="flogo"><img src="image_logo.png" alt="Vexora Designs logo"><span>Vexora <em>Designs</em></span></div><div class="fcopy">© 2025 Vexora Designs. Quetta, Pakistan.</div><div class="fsoc"><a class="sbtn" href="#">ig</a><a class="sbtn" href="#">be</a><a class="sbtn" href="#">wa</a><a class="sbtn" href="#">in</a></div></footer>
+<footer><div class="flogo"><img src="image_logo.png" alt="Vexora Designs logo"><span>Vexora <em>Designs</em></span></div><div class="fcopy">© 2025 Vexora Designs. Quetta, Pakistan.</div><div class="fsoc"><a class="sbtn" href="#">ig</a><a class="sbtn" href="#">be</a><a class="sbtn" href="https://wa.me/93776995101" target="_blank" rel="noopener">wa</a><a class="sbtn" href="#">in</a></div></footer>
 
 <script>
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
@@ -440,6 +441,41 @@ document.querySelectorAll('.pcard').forEach(c=>{c.addEventListener('mousemove',e
 }();
 
 </script>
+<style>
+.wa-float{position:fixed;bottom:22px;right:22px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:9999;box-shadow:0 6px 20px rgba(37,211,102,.45);text-decoration:none;transition:transform .3s ease,opacity .3s ease;}
+.wa-float:hover{transform:scale(1.08);}
+.wa-float svg{width:28px;height:28px;fill:#fff;position:relative;z-index:2;}
+.wa-float::before{content:'';position:absolute;inset:0;border-radius:50%;background:#25D366;animation:waPulse 2.4s ease-out infinite;z-index:1;}
+@keyframes waPulse{0%{transform:scale(1);opacity:.55;}100%{transform:scale(1.9);opacity:0;}}
+.wa-tip{position:fixed;bottom:36px;right:88px;background:#1a1917;color:#fff;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;padding:.55rem .9rem;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transform:translateX(8px);transition:opacity .25s ease,transform .25s ease;z-index:9999;}
+.wa-float:hover + .wa-tip{opacity:1;transform:translateX(0);}
+.wa-float.wa-hide,.wa-float.wa-hide + .wa-tip{opacity:0;pointer-events:none;transform:scale(.6);}
+@media(max-width:640px){
+  .wa-float{width:42px;height:42px;bottom:14px;right:14px;box-shadow:0 4px 14px rgba(37,211,102,.4);}
+  .wa-float svg{width:20px;height:20px;}
+  .wa-tip{display:none;}
+  .wa-float.wa-hide{transform:scale(.5);}
+}
+</style>
+<a class="wa-float" id="waFloatBtn" href="https://wa.me/93776995101?text=Hi%20Vexora%20Designs%2C%20I%27d%20like%20to%20ask%20about%20a%20project." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.9.529 3.68 1.446 5.196L2 22l4.933-1.394A9.947 9.947 0 0012 22c5.523 0 10-4.477 10-10S17.524 2 12.001 2zm0 18.09a8.06 8.06 0 01-4.36-1.28l-.313-.187-3.05.86.833-2.995-.204-.323A8.077 8.077 0 013.91 12c0-4.46 3.63-8.09 8.091-8.09 4.46 0 8.09 3.63 8.09 8.09 0 4.46-3.63 8.09-8.09 8.09z"/></svg>
+</a>
+<span class="wa-tip">Chat with us</span>
+<script>
+(function(){
+  var btn = document.getElementById('waFloatBtn');
+  if (!btn) return;
+  var fields = 'input,textarea,select';
+  document.addEventListener('focusin', function(e){
+    if (e.target.matches && e.target.matches(fields)) btn.classList.add('wa-hide');
+  });
+  document.addEventListener('focusout', function(e){
+    if (e.target.matches && e.target.matches(fields)) {
+      setTimeout(function(){ btn.classList.remove('wa-hide'); }, 150);
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
-```
