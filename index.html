@@ -404,6 +404,7 @@ section { padding: 7rem 4rem; }
   cursor: pointer; position: relative;
   box-shadow: var(--shadow);
   transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+  display: block; text-decoration: none; color: inherit;
 }
 .pitem:first-child { grid-column: span 2; }
 .pitem:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
@@ -417,6 +418,7 @@ section { padding: 7rem 4rem; }
 }
 .pitem:first-child .pimg { aspect-ratio: 16/9; }
 .pitem:hover .pimg { transform: scale(1.06); }
+.pimg img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .p1 { background: linear-gradient(135deg,#fdf0e8,#f5c8a8); color: rgba(232,80,10,0.25); }
 .p2 { background: linear-gradient(135deg,#e8edf5,#b8cde8); color: rgba(60,100,180,0.25); }
 .p3 { background: linear-gradient(135deg,#f0f5e8,#c8e0a8); color: rgba(60,140,60,0.25); }
@@ -1106,11 +1108,11 @@ textarea:focus-visible {
     <a href="order.html" class="btn-outline reveal rr"><span>Order Similar Work</span></a>
   </div>
   <div class="port-grid">
-    <div class="pitem reveal delay-0"><div class="pimg p1">✦</div><div class="plbl"><div class="pcat">Logo & Branding</div><div class="pname">Zara Coffee Rebrand</div></div></div>
-    <div class="pitem reveal delay-1"><div class="pimg p2">◈</div><div class="plbl"><div class="pcat">Social Media</div><div class="pname">TechFlow Campaign</div></div></div>
-    <div class="pitem reveal delay-15"><div class="pimg p3">▣</div><div class="plbl"><div class="pcat">Print & Packaging</div><div class="pname">Luna Skincare Box</div></div></div>
-    <div class="pitem reveal delay-2"><div class="pimg p4">⬚</div><div class="plbl"><div class="pcat">Web & UI Design</div><div class="pname">Verde Restaurant Site</div></div></div>
-    <div class="pitem reveal delay-25"><div class="pimg p5">⬡</div><div class="plbl"><div class="pcat">Brand Identity</div><div class="pname">Nomad Travel Co.</div></div></div>
+    <a class="pitem reveal delay-0" href="project-detail.html?id=dubai-restaurant-banner"><div class="pimg p1"><img src="images/resturant_poster.jpg" loading="lazy" decoding="async" alt="Fresh Food restaurant banner ad design"></div><div class="plbl"><div class="pcat">Print</div><div class="pname">Fresh Food — Restaurant Banner</div></div></a>
+    <a class="pitem reveal delay-1" href="project-detail.html?id=karachi-burger-ad"><div class="pimg p2"><img src="images/karachi_burger.jpg" loading="lazy" decoding="async" alt="The Big Karachi Burger social media ad design"></div><div class="plbl"><div class="pcat">Social Media</div><div class="pname">The Big Karachi Burger</div></div></a>
+    <a class="pitem reveal delay-15" href="project-detail.html?id=orora-roasters"><div class="pimg p3"><img src="images/coffee.jpg" loading="lazy" decoding="async" alt="Orora Roasters coffee brand identity design"></div><div class="plbl"><div class="pcat">Branding</div><div class="pname">Orora Roasters Coffee Brand</div></div></a>
+    <a class="pitem reveal delay-2" href="project-detail.html?id=quetta-logistics-logo"><div class="pimg p4"><img src="images/quetta_1.jpg" loading="lazy" decoding="async" alt="Quetta Logistics logo design"></div><div class="plbl"><div class="pcat">Branding</div><div class="pname">Quetta Logistics Identity</div></div></a>
+    <a class="pitem reveal delay-25" href="project-detail.html?id=bleu-de-chanel-poster"><div class="pimg p5"><img src="images/bleu_de_chanel_poster.jpg" loading="lazy" decoding="async" alt="Bleu de Chanel fragrance poster design"></div><div class="plbl"><div class="pcat">Print</div><div class="pname">Bleu de Chanel Poster</div></div></a>
   </div>
 </section>
 

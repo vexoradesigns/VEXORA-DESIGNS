@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Work — Vexora Designs</title>
+<title>Project — Vexora Designs</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="image_logo.png">
 <style>
@@ -279,6 +279,55 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
   .reveal.rl,
   .reveal.rr{transform:translateY(40px);}
 }
+
+/* PROJECT DETAIL PAGE */
+#pd-hero{padding:9.5rem 4rem 3rem;}
+#pd-hero .breadcrumb{display:flex;align-items:center;gap:.5rem;font-family:'DM Mono',monospace;font-size:.78rem;color:var(--text2);margin-bottom:1.5rem;flex-wrap:wrap;}
+#pd-hero .breadcrumb a{color:var(--text2);text-decoration:none;transition:color .2s;}
+#pd-hero .breadcrumb a:hover{color:var(--accent);}
+#pd-hero .breadcrumb span{color:var(--mid);}
+.pd-cat-badge{display:inline-block;background:var(--alight);color:var(--accent);font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .9rem;border-radius:100px;margin-bottom:1.2rem;}
+.pd-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.4rem);font-weight:900;letter-spacing:-.02em;line-height:1.08;max-width:900px;margin-bottom:1rem;}
+.pd-sub{font-size:1.05rem;color:var(--text2);max-width:640px;}
+#pd-body{padding:0 4rem 5rem;display:grid;grid-template-columns:1fr 320px;gap:3.5rem;align-items:start;}
+.pd-media{border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:2.5rem;background:var(--off);}
+.pd-media img{width:100%;height:auto;display:block;}
+.pd-section-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:.9rem;margin-top:2.2rem;}
+.pd-section-title:first-child{margin-top:0;}
+.pd-text{color:var(--text2);line-height:1.75;font-size:1rem;}
+.pd-sidebar{position:sticky;top:110px;background:var(--off);border:1px solid var(--border);border-radius:16px;padding:1.8rem;}
+.pd-meta-row{display:flex;justify-content:space-between;align-items:baseline;padding:.8rem 0;border-bottom:1px solid var(--border);}
+.pd-meta-row:last-of-type{border-bottom:none;}
+.pd-meta-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);}
+.pd-meta-value{font-weight:600;font-size:.92rem;text-align:right;}
+.pd-services{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem;}
+.pd-tag{background:var(--white);border:1px solid var(--border);color:var(--text2);font-size:.76rem;padding:.35rem .8rem;border-radius:100px;}
+.pd-sidebar .btn-primary{width:100%;justify-content:center;margin-top:1.5rem;}
+#pd-related{padding:1rem 4rem 6rem;}
+.pd-related-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:1.6rem;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.rcard{text-decoration:none;color:var(--text);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;display:block;}
+.rcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.rcard-img{aspect-ratio:4/3;overflow:hidden;background:var(--off);}
+.rcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.rcard:hover .rcard-img img{transform:scale(1.06);}
+.rcard-body{padding:1rem 1.1rem;}
+.rcard-cat{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem;}
+.rcard-title{font-weight:600;font-size:.95rem;}
+#pd-notfound{padding:10rem 4rem 6rem;text-align:center;}
+#pd-notfound h1{font-family:'Playfair Display',serif;font-size:2.2rem;margin-bottom:1rem;}
+#pd-notfound p{color:var(--text2);margin-bottom:2rem;}
+@media(max-width:960px){
+  #pd-hero{padding:8.5rem 1.5rem 2rem;}
+  #pd-body{grid-template-columns:1fr;padding:0 1.5rem 3.5rem;gap:2rem;}
+  .pd-sidebar{position:static;}
+  #pd-related{padding:1rem 1.5rem 4rem;}
+  .related-grid{grid-template-columns:1fr 1fr;gap:1rem;}
+}
+@media(max-width:640px){
+  .related-grid{grid-template-columns:1fr;}
+  .pd-title{font-size:1.7rem;}
+}
 </style>
 </head>
 <body>
@@ -290,7 +339,7 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="services.html">Services</a></li>
-    <li><a href="portfolio.html" class="active">Work</a></li>
+    <li><a href="portfolio.html">Work</a></li>
     <li><a href="blog.html">Insights</a></li>
     <li><a href="order.html">Order</a></li>
     <li><a href="contact.html">Contact</a></li>
@@ -300,112 +349,42 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
 </nav>
 <div class="nav-overlay" id="navOverlay"></div>
 
-<section id="hero">
-  <div class="hero-dots"></div>
-  <div class="hb hb1" id="b1"></div><div class="hb hb2" id="b2"></div>
-  <div class="hero-inner">
-    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Our Work</div>
-    <h1 class="hero-title">
-      <div class="line"><span>Work we're</span></div>
-      <div class="line"><span>proud to <em>show off.</em></span></div>
-    </h1>
-    <p class="hero-sub">150+ projects across branding, social media, print, and web. Browse by category or scroll through everything.</p>
-  </div>
+<section id="pd-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="portfolio.html">Work</a><span>/</span><span id="pdBreadcrumb">Project</span></div>
+  <div class="pd-cat-badge" id="pdCatBadge">Category</div>
+  <h1 class="pd-title" id="pdTitle">Loading project…</h1>
+  <p class="pd-sub" id="pdSub"></p>
 </section>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-in">
-  <span>Logo & Branding</span><span class="dot"> ✦ </span><span>Social Media</span><span class="dot"> ✦ </span><span>Print & Packaging</span><span class="dot"> ✦ </span><span>Web & UI</span><span class="dot"> ✦ </span><span>150+ Projects</span><span class="dot"> ✦ </span><span>80+ Clients</span><span class="dot"> ✦ </span>
-  <span>Logo & Branding</span><span class="dot"> ✦ </span><span>Social Media</span><span class="dot"> ✦ </span><span>Print & Packaging</span><span class="dot"> ✦ </span><span>Web & UI</span><span class="dot"> ✦ </span><span>150+ Projects</span><span class="dot"> ✦ </span><span>80+ Clients</span><span class="dot"> ✦ </span>
-</div></div>
-
-<section id="portfolio">
-  <div class="port-controls reveal">
-    <div class="filter-pills" id="filters">
-      <button class="pill active" data-cat="all">All Projects</button>
-      <button class="pill" data-cat="branding">Branding</button>
-      <button class="pill" data-cat="social">Social Media</button>
-      <button class="pill" data-cat="print">Print</button>
-    </div>
-    <div class="view-toggle">
-      <button class="vbtn active" id="gridBtn" onclick="setView('grid')" title="Grid view">⊞</button>
-      <button class="vbtn" id="listBtn" onclick="setView('list')" title="List view">☰</button>
-    </div>
+<section id="pd-body">
+  <div>
+    <div class="pd-media"><img id="pdImage" src="" alt=""></div>
+    <div class="pd-section-title">The Brief</div>
+    <p class="pd-text" id="pdBrief"></p>
+    <div class="pd-section-title">The Approach</div>
+    <p class="pd-text" id="pdApproach"></p>
   </div>
-
-  <div class="port-grid" id="portGrid">
-
-    <div class="pcard reveal" data-cat="branding" style="transition-delay:.0s" data-id="orora-roasters" data-id="quetta-logistics-logo" data-id="karachi-burger-ad" data-id="dubai-restaurant-banner" data-id="bleu-de-chanel-poster" data-id="sauvage-poster" data-id="global-ict-banner">
-      <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real"><img src="images/coffee.jpg" decoding="async" alt="Orora Roasters coffee brand identity on packaging"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Orora Roasters — Coffee Brand Identity</div><p class="pdesc">Minimalist logomark and full packaging system — wood engraving, fabric, and coffee bag mockups.</p></div><div class="pcard-footer"><span class="pclient">Orora Roasters</span><a href="project-detail.html?id=orora-roasters" class="plink">View <span>→</span></a></div></div>
+  <aside class="pd-sidebar">
+    <div class="pd-meta-row"><span class="pd-meta-label">Client</span><span class="pd-meta-value" id="pdClient"></span></div>
+    <div class="pd-meta-row"><span class="pd-meta-label">Category</span><span class="pd-meta-value" id="pdCategory"></span></div>
+    <div class="pd-meta-row"><span class="pd-meta-label">Year</span><span class="pd-meta-value" id="pdYear"></span></div>
+    <div>
+      <div class="pd-meta-label" style="margin-top:1.1rem;display:block;">Services</div>
+      <div class="pd-services" id="pdServices"></div>
     </div>
+    <a href="order.html" class="btn-primary"><span>Order Similar Work</span></a>
+  </aside>
+</section>
 
-    <div class="pcard reveal" data-cat="branding" style="transition-delay:.06s">
-      <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="images/quetta_1.jpg" loading="lazy" decoding="async" alt="Quetta Logistics logo design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Quetta Logistics — Logo Design</div><p class="pdesc">Clean logomark for a logistics company — a truck formed from a directional arrow, simple navy palette.</p></div><div class="pcard-footer"><span class="pclient">Quetta Logistics</span><a href="project-detail.html?id=quetta-logistics-logo" class="plink">View <span>→</span></a></div></div>
-    </div>
+<section id="pd-notfound" style="display:none;">
+  <h1>Project not found</h1>
+  <p>We couldn't find the project you're looking for. It may have moved.</p>
+  <a href="portfolio.html" class="btn-primary"><span>Back to Our Work</span></a>
+</section>
 
-    <!-- Waiting on real image — re-enable when uploaded
-    <div class="pcard reveal" data-cat="branding" style="transition-delay:.12s">
-      <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="images/zia_tech.png" loading="lazy" decoding="async" alt="Zia Tech logo design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Zia Tech — Logo Design</div><p class="pdesc">A circuit-pattern "Z" logomark with a wifi signal accent for a fiber & smart solutions company.</p></div><div class="pcard-footer"><span class="pclient">Zia Tech</span><a href="#" class="plink">View <span>→</span></a></div></div>
-    </div>
-    -->
-
-    <!-- Waiting on real image — re-enable when uploaded
-    <div class="pcard reveal" data-cat="branding" style="transition-delay:.0s">
-      <div class="pcard-thumb"><div class="pimg real"><img src="images/quetta.png" loading="lazy" decoding="async" alt="Quetta Logistics stationery mockup"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Quetta Logistics — Stationery Mockup</div><p class="pdesc">Letterhead, envelope, and business card mockups applying the logo across a navy & grey brand system.</p></div><div class="pcard-footer"><span class="pclient">Quetta Logistics</span><a href="#" class="plink">View <span>→</span></a></div></div>
-    </div>
-    -->
-
-    <div class="pcard reveal" data-cat="social" style="transition-delay:.08s">
-      <div class="pcard-thumb"><div class="pimg real"><img src="images/karachi_burger.jpg" loading="lazy" decoding="async" alt="The Big Quetta Burger social media ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Social Media</span><span class="pyear">2025</span></div><div class="ptitle">The Big Quetta Burger — Promo Ad</div><p class="pdesc">Vertical story-format food promo design with bold typography and product photography for a burger launch.</p></div><div class="pcard-footer"><span class="pclient">Local F&B Client</span><a href="project-detail.html?id=karachi-burger-ad" class="plink">View <span>→</span></a></div></div>
-    </div>
-
-    <!-- Waiting on real image — re-enable when uploaded
-    <div class="pcard reveal" data-cat="social" style="transition-delay:.16s">
-      <div class="pcard-thumb"><div class="pimg real"><img src="images/20_off.png" loading="lazy" decoding="async" alt="Deal of the Week 20% off promo design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Social Media</span><span class="pyear">2025</span></div><div class="ptitle">Deal of the Week — Promo Graphic</div><p class="pdesc">High-contrast sale announcement design built for square-format social posts and story ads.</p></div><div class="pcard-footer"><span class="pclient">Retail Client</span><a href="#" class="plink">View <span>→</span></a></div></div>
-    </div>
-    -->
-
-    <!-- Waiting on real image — re-enable when uploaded
-    <div class="pcard reveal" data-cat="social" style="transition-delay:.04s">
-      <div class="pcard-thumb"><div class="pimg real"><img src="images/five_star.png" loading="lazy" decoding="async" alt="Five star customer review social post design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Social Media</span><span class="pyear">2025</span></div><div class="ptitle">Customer Review — Testimonial Post</div><p class="pdesc">Geometric testimonial template for sharing customer reviews on Instagram and Facebook.</p></div><div class="pcard-footer"><span class="pclient">Restaurant Client</span><a href="#" class="plink">View <span>→</span></a></div></div>
-    </div>
-    -->
-
-    <div class="pcard reveal" data-cat="print" style="transition-delay:.12s">
-      <div class="pcard-thumb"><div class="pimg real"><img src="images/resturant_poster.jpg" loading="lazy" decoding="async" alt="Dubai restaurant fresh food banner ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2024</span></div><div class="ptitle">Fresh Food — Restaurant Banner</div><p class="pdesc">Wide-format promotional banner for a Dubai restaurant, featuring a 30% off campaign layout.</p></div><div class="pcard-footer"><span class="pclient">Dubai Restaurant</span><a href="project-detail.html?id=dubai-restaurant-banner" class="plink">View <span>→</span></a></div></div>
-    </div>
-
-    <!-- Waiting on real image — re-enable when uploaded
-    <div class="pcard reveal" data-cat="print" style="transition-delay:.2s">
-      <div class="pcard-thumb"><div class="pimg real"><img src="images/brucher_1.png" loading="lazy" decoding="async" alt="Corporate brochure design template"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2024</span></div><div class="ptitle">Corporate Brochure — Layout Concept</div><p class="pdesc">Tri-fold brochure layout exploring a bold geometric arrow motif in navy and black.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="#" class="plink">View <span>→</span></a></div></div>
-    </div>
-    -->
-
-    <div class="pcard reveal" data-cat="print" style="transition-delay:.1s">
-      <div class="pcard-thumb"><div class="pimg real contain"><img src="images/bleu_de_chanel_poster.jpg" loading="lazy" decoding="async" alt="Bleu de Chanel fragrance poster ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2025</span></div><div class="ptitle">Bleu de Chanel — Fragrance Poster Ad</div><p class="pdesc">Moody blue-to-violet gradient poster concept for a men's fragrance campaign, built around bold ribbon graphics.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=bleu-de-chanel-poster" class="plink">View <span>→</span></a></div></div>
-    </div>
-
-    <div class="pcard reveal" data-cat="print" style="transition-delay:.15s">
-      <div class="pcard-thumb"><div class="pimg real contain"><img src="images/chanel_sauvage_poster.jpg" loading="lazy" decoding="async" alt="Chanel Sauvage fragrance poster ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2025</span></div><div class="ptitle">Sauvage — Fragrance Poster Ad</div><p class="pdesc">Split-tone poster design pairing cool blue and warm cream backgrounds with fresh botanical accents.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=sauvage-poster" class="plink">View <span>→</span></a></div></div>
-    </div>
-
-    <div class="pcard reveal" data-cat="print" style="transition-delay:.2s">
-      <div class="pcard-thumb"><div class="pimg real contain"><img src="images/global_ict_banner.jpg" loading="lazy" decoding="async" alt="Global Institute of Computer Technology roll-up banner design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
-      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2025</span></div><div class="ptitle">Global ICT — Roll-Up Banner Design</div><p class="pdesc">Education-sector roll-up banner layout balancing brand values, program info, and a clean navy-and-gold palette.</p></div><div class="pcard-footer"><span class="pclient">Global Institute of Computer Technology</span><a href="project-detail.html?id=global-ict-banner" class="plink">View <span>→</span></a></div></div>
-    </div>
-
-    <div class="no-results" id="noResults"><p>No projects in this category yet.</p></div>
-  </div>
+<section id="pd-related">
+  <div class="pd-related-title">More Projects</div>
+  <div class="related-grid" id="pdRelated"></div>
 </section>
 
 <section id="cta">
@@ -432,13 +411,161 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
 document.addEventListener('mousemove',e=>{const xr=(e.clientX/innerWidth-.5)*20,yr=(e.clientY/innerHeight-.5)*20;const b1=document.getElementById('b1'),b2=document.getElementById('b2');if(b1)b1.style.transform=`translate(${xr}px,${yr}px)`;if(b2)b2.style.transform=`translate(${-xr*.6}px,${-yr*.6}px)`;});
 const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-let activeCat='all';
-document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{activeCat=p.dataset.cat;document.querySelectorAll('.pill').forEach(x=>x.classList.toggle('active',x===p));applyFilter();}));
-function applyFilter(){const cards=[...document.querySelectorAll('.pcard')];let v=0;cards.forEach(c=>{const show=activeCat==='all'||c.dataset.cat===activeCat;c.style.display=show?'flex':'none';if(show)v++;});document.getElementById('noResults').style.display=v===0?'block':'none';}
-function setView(v){const g=document.getElementById('portGrid');g.classList.toggle('list-view',v==='list');document.getElementById('gridBtn').classList.toggle('active',v==='grid');document.getElementById('listBtn').classList.toggle('active',v==='list');}
 document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.2}px)`;});b.addEventListener('mouseleave',()=>b.style.transform='');});
-document.querySelectorAll('.pcard').forEach(c=>{c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*4}deg) rotateX(${-y*4}deg) translateY(-8px)`;});c.addEventListener('mouseleave',()=>c.style.transform='');});
-document.querySelectorAll('.pcard[data-id]').forEach(c=>{c.style.cursor='pointer';c.addEventListener('click',e=>{if(e.target.closest('a'))return;window.location.href='project-detail.html?id='+c.dataset.id;});});
+
+/* PROJECT DATA */
+const PROJECTS = [
+  {
+    id: 'orora-roasters',
+    title: 'Orora Roasters — Coffee Brand Identity',
+    category: 'Branding',
+    year: '2025',
+    client: 'Orora Roasters',
+    image: 'images/coffee.jpg',
+    alt: 'Orora Roasters coffee brand identity on packaging',
+    sub: 'A minimalist logomark and full packaging system for a craft coffee roaster, built to feel premium on a shelf full of louder brands.',
+    brief: 'Orora Roasters needed a brand identity that could compete with established specialty coffee names while staying true to their small-batch, artisan roots. The existing look felt generic and did not reflect the quality of the product inside the bag.',
+    approach: 'We built a mountain-and-sunrise logomark, a nod to high-altitude coffee origins, rendered simply enough to engrave into wood, print on fabric, and stamp onto kraft packaging without losing detail. A warm, neutral palette lets the coffee itself stay the visual hero across every touchpoint.',
+    services: ['Logo Design', 'Packaging Design', 'Brand Guidelines']
+  },
+  {
+    id: 'quetta-logistics-logo',
+    title: 'Quetta Logistics — Logo Design',
+    category: 'Branding',
+    year: '2025',
+    client: 'Quetta Logistics',
+    image: 'images/quetta_1.jpg',
+    alt: 'Quetta Logistics logo design',
+    sub: 'A clean, confident logomark for a logistics company — a truck formed from a directional arrow, built for instant recognition on trucks and paperwork alike.',
+    brief: 'Quetta Logistics wanted a mark that communicated speed, direction, and reliability at a glance, something legible from a distance on the side of a delivery truck, and just as sharp printed small on an invoice.',
+    approach: 'The logomark merges an arrow and a truck silhouette into a single continuous shape, keeping the design simple enough to work in a single navy tone. This also made it easy to extend cleanly across stationery, signage, and vehicle livery.',
+    services: ['Logo Design', 'Brand Identity']
+  },
+  {
+    id: 'karachi-burger-ad',
+    title: 'The Big Karachi Burger — Promo Ad',
+    category: 'Social Media',
+    year: '2025',
+    client: 'Local F&B Client',
+    image: 'images/karachi_burger.jpg',
+    alt: 'The Big Karachi Burger social media ad',
+    sub: 'A vertical, story-format promo ad built to stop the scroll — bold typography and hero product photography for a burger launch.',
+    brief: 'The client needed scroll-stopping creative for a new burger launch, optimised for Instagram and Facebook Stories, with a clear call to action driving orders.',
+    approach: 'Oversized type anchors the top of the frame while the product floats front and centre, lit and cropped for maximum appetite appeal. A single bold call-to-action button keeps the next step obvious.',
+    services: ['Social Media Design', 'Ad Creative']
+  },
+  {
+    id: 'dubai-restaurant-banner',
+    title: 'Fresh Food — Restaurant Banner',
+    category: 'Print',
+    year: '2024',
+    client: 'Dubai Restaurant',
+    image: 'images/resturant_poster.jpg',
+    alt: 'Dubai restaurant fresh food banner ad',
+    sub: 'A wide-format promotional banner built around real food photography and a bold 30%-off campaign message.',
+    brief: 'A Dubai-based restaurant needed a wide banner for both digital placement and in-venue print, promoting a limited-time discount without looking like a generic clip-art flyer.',
+    approach: 'Diagonal photo panels break up the layout for visual movement, while a high-contrast discount badge draws the eye immediately. The dark green backdrop keeps the food photography looking rich and appetising.',
+    services: ['Print Design', 'Promotional Design']
+  },
+  {
+    id: 'bleu-de-chanel-poster',
+    title: 'Bleu de Chanel — Fragrance Poster Ad',
+    category: 'Print',
+    year: '2025',
+    client: 'Concept Work',
+    image: 'images/bleu_de_chanel_poster.jpg',
+    alt: 'Bleu de Chanel fragrance poster design',
+    sub: 'A moody blue-to-violet gradient poster concept for a fragrance campaign, built around bold ribbon graphics and dramatic lighting.',
+    brief: 'A concept piece exploring premium fragrance advertising, the goal was to capture the confident, nocturnal mood associated with high-end men\u2019s cologne campaigns.',
+    approach: 'Diagonal ribbon graphics sweep across a rich gradient backdrop, guiding the eye straight to the product. Tight, elegant typography reinforces the premium feel without competing with the bottle itself.',
+    services: ['Poster Design', 'Advertising Concept']
+  },
+  {
+    id: 'sauvage-poster',
+    title: 'Sauvage — Fragrance Poster Ad',
+    category: 'Print',
+    year: '2025',
+    client: 'Concept Work',
+    image: 'images/chanel_sauvage_poster.jpg',
+    alt: 'Sauvage fragrance poster design',
+    sub: 'A split-tone poster design pairing cool blue and warm cream backgrounds with fresh botanical accents.',
+    brief: 'A concept piece built to explore contrast-driven fragrance advertising, pairing "fresh and cool" against "warm and natural" within a single frame.',
+    approach: 'A diagonal split divides the poster into two moods, unified by the product bottle sitting directly on the seam. Ice and berry elements reinforce the fragrance\u2019s dual character at a glance.',
+    services: ['Poster Design', 'Advertising Concept']
+  },
+  {
+    id: 'global-ict-banner',
+    title: 'Global ICT — Roll-Up Banner Design',
+    category: 'Print',
+    year: '2025',
+    client: 'Global Institute of Computer Technology',
+    image: 'images/global_ict_banner.jpg',
+    alt: 'Global Institute of Computer Technology roll-up banner design',
+    sub: 'An education-sector roll-up banner balancing brand values, program information, and a clean navy-and-gold palette.',
+    brief: 'Global ICT needed a roll-up banner for open days and enrolment events, something that communicated trust and opportunity while fitting a lot of information without feeling cluttered.',
+    approach: 'A clear vertical hierarchy leads with the headline promise, followed by core values as scannable icons, then a concise paragraph for anyone who wants more detail. Gold accents against navy keep it feeling premium and education-appropriate.',
+    services: ['Print Design', 'Brand Layout']
+  }
+];
+
+/* RENDER DETAIL PAGE */
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const project = PROJECTS.find(function(p){ return p.id === id; });
+
+  if (!project) {
+    document.getElementById('pd-hero').style.display = 'none';
+    document.getElementById('pd-body').style.display = 'none';
+    document.getElementById('pd-related').style.display = 'none';
+    document.getElementById('pd-notfound').style.display = 'block';
+    return;
+  }
+
+  document.title = project.title + ' — Vexora Designs';
+  document.getElementById('pdBreadcrumb').textContent = project.title;
+  document.getElementById('pdCatBadge').textContent = project.category;
+  document.getElementById('pdTitle').textContent = project.title;
+  document.getElementById('pdSub').textContent = project.sub;
+  document.getElementById('pdImage').src = project.image;
+  document.getElementById('pdImage').alt = project.alt;
+  document.getElementById('pdBrief').textContent = project.brief;
+  document.getElementById('pdApproach').textContent = project.approach;
+  document.getElementById('pdClient').textContent = project.client;
+  document.getElementById('pdCategory').textContent = project.category;
+  document.getElementById('pdYear').textContent = project.year;
+
+  const servicesEl = document.getElementById('pdServices');
+  project.services.forEach(function(s){
+    const tag = document.createElement('span');
+    tag.className = 'pd-tag';
+    tag.textContent = s;
+    servicesEl.appendChild(tag);
+  });
+
+  const relatedEl = document.getElementById('pdRelated');
+  const others = PROJECTS.filter(function(p){ return p.id !== project.id; });
+  for (let i = others.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = others[i]; others[i] = others[j]; others[j] = tmp;
+  }
+  others.slice(0, 3).forEach(function(p){
+    const a = document.createElement('a');
+    a.className = 'rcard';
+    a.href = 'project-detail.html?id=' + p.id;
+    const imgWrap = document.createElement('div');
+    imgWrap.className = 'rcard-img';
+    const img = document.createElement('img');
+    img.src = p.image; img.alt = p.alt; img.loading = 'lazy'; img.decoding = 'async';
+    imgWrap.appendChild(img);
+    const body = document.createElement('div');
+    body.className = 'rcard-body';
+    body.innerHTML = '<div class="rcard-cat">' + p.category + '</div><div class="rcard-title">' + p.title + '</div>';
+    a.appendChild(imgWrap);
+    a.appendChild(body);
+    relatedEl.appendChild(a);
+  });
+})();
 
 /* MOBILE MENU TOGGLE */
 !function(){
