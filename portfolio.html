@@ -69,6 +69,8 @@ nav.scrolled{background:rgba(255,255,255,.92);box-shadow:0 1px 0 var(--border);b
 .port-controls{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:3.5rem;}
 .filter-pills{display:flex;gap:.5rem;flex-wrap:wrap;}
 .pill{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:.45rem 1.1rem;border-radius:100px;border:1.5px solid var(--border);color:var(--text2);background:var(--white);cursor:pointer;transition:color .2s,background .2s,border-color .2s,transform .15s;}
+.filter-pills-ind{margin-top:.7rem;}
+.pill-ind{font-size:.63rem;padding:.36rem .9rem;opacity:.8;}
 .pill:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px);}
 .pill.active{background:var(--text);color:var(--white);border-color:var(--text);}
 .view-toggle{display:flex;gap:.5rem;}
@@ -169,6 +171,14 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
   .ticker-in span{font-size:.72rem;padding:0 1.1rem;}
   #portfolio,#cta{padding:3.5rem 1rem;}
   .port-controls{margin-bottom:2rem;gap:1rem;}
+  .filter-pills,.filter-pills-ind{
+    flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;padding-bottom:.3rem;
+    margin:0 -1rem;padding-left:1rem;padding-right:1rem;
+    scrollbar-width:none;
+  }
+  .filter-pills::-webkit-scrollbar,.filter-pills-ind::-webkit-scrollbar{display:none;}
+  .filter-pills .pill,.filter-pills-ind .pill{flex:0 0 auto;scroll-snap-align:start;}
   .filter-pills{gap:.4rem;}
   .pill{font-size:.62rem;padding:.4rem .85rem;}
   .view-toggle{align-self:flex-end;}
@@ -325,6 +335,18 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
       <button class="pill" data-cat="branding">Branding</button>
       <button class="pill" data-cat="social">Social Media</button>
       <button class="pill" data-cat="print">Print</button>
+      <button class="pill" data-cat="web">Web Design</button>
+    </div>
+    <div class="filter-pills filter-pills-ind" id="filtersInd">
+      <button class="pill pill-ind active" data-ind="all">All Industries</button>
+      <button class="pill pill-ind" data-ind="food">Food &amp; Beverage</button>
+      <button class="pill pill-ind" data-ind="corporate">Corporate &amp; Tech</button>
+      <button class="pill pill-ind" data-ind="lifestyle">Fashion &amp; Lifestyle</button>
+      <button class="pill pill-ind" data-ind="education">Education</button>
+      <button class="pill pill-ind" data-ind="logistics">Logistics</button>
+      <button class="pill pill-ind" data-ind="automotive">Automotive</button>
+      <button class="pill pill-ind" data-ind="sports">Sports</button>
+      <button class="pill pill-ind" data-ind="other">Other</button>
     </div>
     <div class="view-toggle">
       <button class="vbtn active" id="gridBtn" onclick="setView('grid')" title="Grid view">⊞</button>
@@ -334,12 +356,12 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
 
   <div class="port-grid" id="portGrid">
 
-    <div class="pcard reveal" data-cat="branding" style="transition-delay:.0s" data-id="orora-roasters" data-id="quetta-logistics-logo" data-id="karachi-burger-ad" data-id="dubai-restaurant-banner" data-id="bleu-de-chanel-poster" data-id="sauvage-poster" data-id="global-ict-banner">
+    <div class="pcard reveal" data-cat="branding" data-id="orora-roasters" data-ind="food" style="transition-delay:.0s">
       <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real"><img src="images/coffee.jpg" decoding="async" alt="Orora Roasters coffee brand identity on packaging"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Orora Roasters — Coffee Brand Identity</div><p class="pdesc">Minimalist logomark and full packaging system — wood engraving, fabric, and coffee bag mockups.</p></div><div class="pcard-footer"><span class="pclient">Orora Roasters</span><a href="project-detail.html?id=orora-roasters" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="branding" style="transition-delay:.06s">
+    <div class="pcard reveal" data-cat="branding" data-id="quetta-logistics-logo" data-ind="logistics" style="transition-delay:.06s">
       <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="images/quetta_1.jpg" loading="lazy" decoding="async" alt="Quetta Logistics logo design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Quetta Logistics — Logo Design</div><p class="pdesc">Clean logomark for a logistics company — a truck formed from a directional arrow, simple navy palette.</p></div><div class="pcard-footer"><span class="pclient">Quetta Logistics</span><a href="project-detail.html?id=quetta-logistics-logo" class="plink">View <span>→</span></a></div></div>
     </div>
@@ -358,7 +380,7 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
     </div>
     -->
 
-    <div class="pcard reveal" data-cat="social" style="transition-delay:.08s">
+    <div class="pcard reveal" data-cat="social" data-id="karachi-burger-ad" data-ind="food" style="transition-delay:.08s">
       <div class="pcard-thumb"><div class="pimg real"><img src="images/karachi_burger.jpg" loading="lazy" decoding="async" alt="The Big Quetta Burger social media ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Social Media</span><span class="pyear">2025</span></div><div class="ptitle">The Big Quetta Burger — Promo Ad</div><p class="pdesc">Vertical story-format food promo design with bold typography and product photography for a burger launch.</p></div><div class="pcard-footer"><span class="pclient">Local F&B Client</span><a href="project-detail.html?id=karachi-burger-ad" class="plink">View <span>→</span></a></div></div>
     </div>
@@ -377,7 +399,7 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
     </div>
     -->
 
-    <div class="pcard reveal" data-cat="print" style="transition-delay:.12s">
+    <div class="pcard reveal" data-cat="print" data-id="dubai-restaurant-banner" data-ind="food" style="transition-delay:.12s">
       <div class="pcard-thumb"><div class="pimg real"><img src="images/resturant_poster.jpg" loading="lazy" decoding="async" alt="Dubai restaurant fresh food banner ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2024</span></div><div class="ptitle">Fresh Food — Restaurant Banner</div><p class="pdesc">Wide-format promotional banner for a Dubai restaurant, featuring a 30% off campaign layout.</p></div><div class="pcard-footer"><span class="pclient">Dubai Restaurant</span><a href="project-detail.html?id=dubai-restaurant-banner" class="plink">View <span>→</span></a></div></div>
     </div>
@@ -389,64 +411,99 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
     </div>
     -->
 
-    <div class="pcard reveal" data-cat="print" style="transition-delay:.1s">
+    <div class="pcard reveal" data-cat="print" data-id="bleu-de-chanel-poster" data-ind="lifestyle" style="transition-delay:.1s">
       <div class="pcard-thumb"><div class="pimg real contain"><img src="images/bleu_de_chanel_poster.jpg" loading="lazy" decoding="async" alt="Bleu de Chanel fragrance poster ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2025</span></div><div class="ptitle">Bleu de Chanel — Fragrance Poster Ad</div><p class="pdesc">Moody blue-to-violet gradient poster concept for a men's fragrance campaign, built around bold ribbon graphics.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=bleu-de-chanel-poster" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="print" style="transition-delay:.15s">
+    <div class="pcard reveal" data-cat="print" data-id="sauvage-poster" data-ind="lifestyle" style="transition-delay:.15s">
       <div class="pcard-thumb"><div class="pimg real contain"><img src="images/chanel_sauvage_poster.jpg" loading="lazy" decoding="async" alt="Chanel Sauvage fragrance poster ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2025</span></div><div class="ptitle">Sauvage — Fragrance Poster Ad</div><p class="pdesc">Split-tone poster design pairing cool blue and warm cream backgrounds with fresh botanical accents.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=sauvage-poster" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="print" style="transition-delay:.2s">
+    <div class="pcard reveal" data-cat="print" data-id="global-ict-banner" data-ind="education" style="transition-delay:.2s">
       <div class="pcard-thumb"><div class="pimg real contain"><img src="images/global_ict_banner.jpg" loading="lazy" decoding="async" alt="Global Institute of Computer Technology roll-up banner design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2025</span></div><div class="ptitle">Global ICT — Roll-Up Banner Design</div><p class="pdesc">Education-sector roll-up banner layout balancing brand values, program info, and a clean navy-and-gold palette.</p></div><div class="pcard-footer"><span class="pclient">Global Institute of Computer Technology</span><a href="project-detail.html?id=global-ict-banner" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="branding" data-id="view-logo" style="transition-delay:.05s">
+    <div class="pcard reveal" data-cat="branding" data-id="view-logo" data-ind="other" style="transition-delay:.05s">
       <div class="pcard-thumb"><div class="pimg real contain"><img src="images/view-logo.jpg" loading="lazy" decoding="async" alt="VIEW logo design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">VIEW — Logo Design</div><p class="pdesc">A crossed-ribbon eye logomark exploring perspective and clarity for a brand named VIEW.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=view-logo" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="social" data-id="tshirt-promo-ad" style="transition-delay:.1s">
+    <div class="pcard reveal" data-cat="social" data-id="tshirt-promo-ad" data-ind="lifestyle" style="transition-delay:.1s">
       <div class="pcard-thumb"><div class="pimg real"><img src="images/tshirt-promo-ad.jpg" loading="lazy" decoding="async" alt="T-shirt brand promo ad design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Social Media</span><span class="pyear">2025</span></div><div class="ptitle">T-Shirt Brand — Promo Ad</div><p class="pdesc">A clean product-focused ad template built to drive direct WhatsApp orders for apparel.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=tshirt-promo-ad" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="print" data-id="creative-marketing-banner" style="transition-delay:.15s">
+    <div class="pcard reveal" data-cat="print" data-id="creative-marketing-banner" data-ind="other" style="transition-delay:.15s">
       <div class="pcard-thumb"><div class="pimg real"><img src="images/creative-marketing-banner.jpg" loading="lazy" decoding="async" alt="Creative marketing agency banner ad"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2025</span></div><div class="ptitle">Creative Marketing — Agency Banner</div><p class="pdesc">A bold purple-and-gold wide banner concept for a marketing agency\u2019s own self-promotion.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=creative-marketing-banner" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="print" data-id="certificate-of-appreciation" style="transition-delay:.2s">
+    <div class="pcard reveal" data-cat="print" data-id="certificate-of-appreciation" data-ind="education" style="transition-delay:.2s">
       <div class="pcard-thumb"><div class="pimg real contain"><img src="images/certificate-of-appreciation.jpg" loading="lazy" decoding="async" alt="Certificate of appreciation template design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2025</span></div><div class="ptitle">Certificate of Appreciation — Template</div><p class="pdesc">A navy-and-gold certificate layout built for schools, courses, and corporate recognition events.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=certificate-of-appreciation" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="branding" data-id="junaid-service-station-badge" style="transition-delay:.05s">
+    <div class="pcard reveal" data-cat="branding" data-id="junaid-service-station-badge" data-ind="automotive" style="transition-delay:.05s">
       <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="images/junaid-service-station-badge.jpg" loading="lazy" decoding="async" alt="Junaid Service Station logo badge design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Junaid Service Station — Logo Badge</div><p class="pdesc">A bilingual English/Urdu circular emblem for a car wash and service station, built to work equally well on signage and stamps.</p></div><div class="pcard-footer"><span class="pclient">Junaid Service Station</span><a href="project-detail.html?id=junaid-service-station-badge" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="print" data-id="graphic-designer-business-card" style="transition-delay:.1s">
+    <div class="pcard reveal" data-cat="print" data-id="graphic-designer-business-card" data-ind="other" style="transition-delay:.1s">
       <div class="pcard-thumb"><div class="pimg real"><img src="images/graphic-designer-business-card.jpg" loading="lazy" decoding="async" alt="Graphic designer business card design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2025</span></div><div class="ptitle">Graphic Designer — Business Card</div><p class="pdesc">A sky-blue and navy diamond-motif business card layout for a freelance graphic designer.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=graphic-designer-business-card" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="branding" data-id="football-club-crest" style="transition-delay:.15s">
+    <div class="pcard reveal" data-cat="branding" data-id="football-club-crest" data-ind="sports" style="transition-delay:.15s">
       <div class="pcard-thumb"><div class="pimg real contain"><img src="images/football-club-crest.png" loading="lazy" decoding="async" alt="Football club crest badge design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2025</span></div><div class="ptitle">Football Club — Crest &amp; Badge</div><p class="pdesc">A classic shield crest exploring heritage typography and a "since 1965" badge treatment for a sports club.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=football-club-crest" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="print" data-id="ramadan-timetable" style="transition-delay:.2s">
+    <div class="pcard reveal" data-cat="print" data-id="ramadan-timetable" data-ind="other" style="transition-delay:.2s">
       <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="images/ramadan-timetable.jpg" loading="lazy" decoding="async" alt="Ramadan Kareem sehri iftar timetable design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2026</span></div><div class="ptitle">Ramadan Kareem — Sehri &amp; Iftar Timetable</div><p class="pdesc">A deep-blue and gold seasonal timetable design with lantern illustrations and a full month of prayer timings.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=ramadan-timetable" class="plink">View <span>→</span></a></div></div>
     </div>
 
-    <div class="pcard reveal" data-cat="print" data-id="apex-logistics-opening-soon" style="transition-delay:.05s">
+    <div class="pcard reveal" data-cat="print" data-id="apex-logistics-opening-soon" data-ind="logistics" style="transition-delay:.05s">
       <div class="pcard-thumb"><div class="pimg real contain"><img src="images/apex-logistics-opening-soon.jpg" loading="lazy" decoding="async" alt="Apex Logistics opening soon flyer design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
       <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Print</span><span class="pyear">2025</span></div><div class="ptitle">Apex Logistics — Opening Soon Flyer</div><p class="pdesc">A bold red-and-black announcement flyer for a new logistics company launching in Quetta.</p></div><div class="pcard-footer"><span class="pclient">Apex Logistics</span><a href="project-detail.html?id=apex-logistics-opening-soon" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="web" data-id="webdesign-school" data-ind="education" style="transition-delay:.1s">
+      <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="sites/webdesign-school.jpg" loading="lazy" decoding="async" alt="Bridge Academy English course website design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Web Design</span><span class="pyear">2026</span></div><div class="ptitle">Learn Academy — English Course Website</div><p class="pdesc">A full, multi-section homepage for an English language school — courses, teachers, pricing, testimonials, and a CEFR level tracker built right into the hero.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=learn-academy" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="web" data-id="webdesign-business" data-ind="corporate" style="transition-delay:.15s">
+      <div class="pcard-thumb"><div class="pimg real contain"><img src="images/webdesign-business.jpg" loading="lazy" decoding="async" alt="Meridian Consulting business website design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Web Design</span><span class="pyear">2026</span></div><div class="ptitle">Meridian — Consulting Firm Website</div><p class="pdesc">A dark, structured homepage design for a business strategy consultancy, built around a data-forward grid layout.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=webdesign-business" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="web" data-id="webdesign-coffee" data-ind="food" style="transition-delay:.2s">
+      <div class="pcard-thumb"><div class="pimg real contain"><img src="images/webdesign-coffee.jpg" loading="lazy" decoding="async" alt="Ember and Ash coffee shop website design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Web Design</span><span class="pyear">2026</span></div><div class="ptitle">Ember & Ash — Coffee Shop Website</div><p class="pdesc">A warm, dark-roast-toned homepage design for a specialty coffee roaster, with tasting-note cards for each bean.</p></div><div class="pcard-footer"><span class="pclient">Concept Work</span><a href="project-detail.html?id=webdesign-coffee" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="branding" data-id="graph-corporation" data-ind="corporate" style="transition-delay:.05s">
+      <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="images/graph-corporation-branding.jpg" loading="lazy" decoding="async" alt="Graph Corporation brand identity design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2026</span></div><div class="ptitle">Graph Corporation — Brand Identity</div><p class="pdesc">A four-"G" logomark that doubles as a flower motif, built around a bold red identity and a full stationery rollout.</p></div><div class="pcard-footer"><span class="pclient">Graph Corporation</span><a href="project-detail.html?id=graph-corporation" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="branding" data-id="skillzone" data-ind="corporate" style="transition-delay:.1s">
+      <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="images/skillzone-branding.jpg" loading="lazy" decoding="async" alt="Skill Zone Digital Services brand identity design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2026</span></div><div class="ptitle">Skill Zone — Digital Services Identity</div><p class="pdesc">An S+Z monogram and full brand system for a digital services agency, from ID badges to lanyards.</p></div><div class="pcard-footer"><span class="pclient">Skill Zone Digital Services</span><a href="project-detail.html?id=skillzone" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="branding" data-id="gentlewear" data-ind="lifestyle" style="transition-delay:.15s">
+      <div class="pcard-thumb"><div class="pimg real contain"><img src="images/gentlewear-branding.jpg" loading="lazy" decoding="async" alt="Gentle Wear brand identity design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2026</span></div><div class="ptitle">Gentle Wear — Fashion Brand Identity</div><p class="pdesc">A G+W diamond logomark balancing softness and structure for a menswear clothing brand.</p></div><div class="pcard-footer"><span class="pclient">Gentle Wear</span><a href="project-detail.html?id=gentlewear" class="plink">View <span>→</span></a></div></div>
+    </div>
+
+    <div class="pcard reveal" data-cat="branding" data-id="friendscafe" data-ind="food" style="transition-delay:.2s">
+      <div class="pcard-thumb"><span class="featured-badge">Featured</span><div class="pimg real contain"><img src="images/friendscafe-branding.jpg" loading="lazy" decoding="async" alt="Friends Cafe brand identity design"></div><div class="pcard-overlay"><div class="pcard-overlay-inner"><div class="view-proj">View Project →</div></div></div></div>
+      <div class="pcard-body"><div><div class="pcard-meta"><span class="pcat">Branding</span><span class="pyear">2026</span></div><div class="ptitle">Friends Cafe — Coffee Shop Identity</div><p class="pdesc">A warm, hand-drawn coffee cup logomark and full brand rollout for a Quetta cafe, from cards to menu photography.</p></div><div class="pcard-footer"><span class="pclient">Friends Cafe</span><a href="project-detail.html?id=friendscafe" class="plink">View <span>→</span></a></div></div>
     </div>
 
     <div class="no-results" id="noResults"><p>No projects in this category yet.</p></div>
@@ -478,8 +535,10 @@ document.addEventListener('mousemove',e=>{const xr=(e.clientX/innerWidth-.5)*20,
 const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 let activeCat='all';
-document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{activeCat=p.dataset.cat;document.querySelectorAll('.pill').forEach(x=>x.classList.toggle('active',x===p));applyFilter();}));
-function applyFilter(){const cards=[...document.querySelectorAll('.pcard')];let v=0;cards.forEach(c=>{const show=activeCat==='all'||c.dataset.cat===activeCat;c.style.display=show?'flex':'none';if(show)v++;});document.getElementById('noResults').style.display=v===0?'block':'none';}
+let activeInd='all';
+document.querySelectorAll('.pill:not(.pill-ind)').forEach(p=>p.addEventListener('click',()=>{activeCat=p.dataset.cat;document.querySelectorAll('.pill:not(.pill-ind)').forEach(x=>x.classList.toggle('active',x===p));applyFilter();}));
+document.querySelectorAll('.pill-ind').forEach(p=>p.addEventListener('click',()=>{activeInd=p.dataset.ind;document.querySelectorAll('.pill-ind').forEach(x=>x.classList.toggle('active',x===p));applyFilter();}));
+function applyFilter(){const cards=[...document.querySelectorAll('.pcard')];let v=0;cards.forEach(c=>{const showCat=activeCat==='all'||c.dataset.cat===activeCat;const showInd=activeInd==='all'||c.dataset.ind===activeInd;const show=showCat&&showInd;c.style.display=show?'flex':'none';if(show)v++;});document.getElementById('noResults').style.display=v===0?'block':'none';}
 function setView(v){const g=document.getElementById('portGrid');g.classList.toggle('list-view',v==='list');document.getElementById('gridBtn').classList.toggle('active',v==='grid');document.getElementById('listBtn').classList.toggle('active',v==='list');}
 document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.2}px)`;});b.addEventListener('mouseleave',()=>b.style.transform='');});
 document.querySelectorAll('.pcard').forEach(c=>{c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*4}deg) rotateX(${-y*4}deg) translateY(-8px)`;});c.addEventListener('mouseleave',()=>c.style.transform='');});

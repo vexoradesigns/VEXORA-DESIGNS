@@ -292,8 +292,24 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
 #pd-body{padding:0 4rem 5rem;display:grid;grid-template-columns:1fr 320px;gap:3.5rem;align-items:start;}
 .pd-media{border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:2.5rem;background:var(--off);}
 .pd-media img{width:100%;height:auto;display:block;}
+.pd-live-wrap{display:none;margin:0 0 2.5rem;}
+.pd-live-wrap.active{display:block;}
+.pd-live-bar{background:#e8e6e1;border-radius:12px 12px 0 0;padding:.7rem 1rem;display:flex;align-items:center;gap:.9rem;border:1px solid var(--border);border-bottom:none;}
+.pd-live-dots{display:flex;gap:.4rem;}
+.pd-live-dots span{width:10px;height:10px;border-radius:50%;background:#d0cdc6;}
+.pd-live-url{flex:1;background:var(--white);border-radius:100px;padding:.35rem .9rem;font-family:'DM Mono',monospace;font-size:.72rem;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pd-live-frame-wrap{border:1px solid var(--border);border-top:none;border-radius:0 0 16px 16px;overflow:hidden;box-shadow:var(--shadow-lg);background:var(--white);}
+.pd-live-frame-wrap iframe{width:100%;height:600px;border:none;display:block;}
+.pd-live-cta{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin-top:1.1rem;}
+.pd-live-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;padding:.85rem 1.5rem;border-radius:100px;font-weight:600;font-size:.9rem;text-decoration:none;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;}
+.pd-live-btn:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(232,80,10,.3);}
+.pd-live-note{font-size:.82rem;color:var(--mid);}
 .pd-section-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:.9rem;margin-top:2.2rem;}
 .pd-section-title:first-child{margin-top:0;}
+@media(max-width:640px){
+  .pd-live-frame-wrap iframe{height:420px;}
+  .pd-live-url{font-size:.66rem;}
+}
 .pd-text{color:var(--text2);line-height:1.75;font-size:1rem;}
 .pd-sidebar{position:sticky;top:110px;background:var(--off);border:1px solid var(--border);border-radius:16px;padding:1.8rem;}
 .pd-meta-row{display:flex;justify-content:space-between;align-items:baseline;padding:.8rem 0;border-bottom:1px solid var(--border);}
@@ -358,7 +374,22 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
 
 <section id="pd-body">
   <div>
-    <div class="pd-media"><img id="pdImage" src="" alt=""></div>
+    <div class="pd-media" id="pdMediaWrap"><img id="pdImage" src="" alt=""></div>
+
+    <div class="pd-live-wrap" id="pdLiveWrap">
+      <div class="pd-live-bar">
+        <div class="pd-live-dots"><span></span><span></span><span></span></div>
+        <div class="pd-live-url" id="pdLiveUrl"></div>
+      </div>
+      <div class="pd-live-frame-wrap">
+        <iframe id="pdLiveFrame" src="" loading="lazy" title="Live project preview"></iframe>
+      </div>
+      <div class="pd-live-cta">
+        <a href="#" id="pdLiveBtn" target="_blank" rel="noopener" class="pd-live-btn">Visit Live Demo <span>↗</span></a>
+        <span class="pd-live-note">Fully interactive — scroll, click, explore it for real.</span>
+      </div>
+    </div>
+
     <div class="pd-section-title">The Brief</div>
     <p class="pd-text" id="pdBrief"></p>
     <div class="pd-section-title">The Approach</div>
@@ -399,7 +430,7 @@ footer{background:var(--text);padding:2.5rem 4rem;display:flex;align-items:cente
   </div>
 </section>
 
-<footer><div class="flogo"><img src="image_logo.png" alt="Vexora Designs logo"><span>Vexora <em>Designs</em></span></div><div class="fcopy">© 2025 Vexora Designs. Quetta, Pakistan.</div><div class="fsoc"><a class="sbtn" href="#">ig</a><a class="sbtn" href="#">be</a><a class="sbtn" href="https://wa.me/93776995101" target="_blank" rel="noopener">wa</a><a class="sbtn" href="#">in</a></div></footer>
+<footer><div class="flogo"><img src="image_logo.png" alt="Vexora Designs logo"><span>Vexora <em>Designs</em></span></div><div class="fcopy">© 2026 Vexora Designs. Quetta, Pakistan.</div><div class="fsoc"><a class="sbtn" href="#">ig</a><a class="sbtn" href="#">be</a><a class="sbtn" href="https://wa.me/93776995101" target="_blank" rel="noopener">wa</a><a class="sbtn" href="#">in</a></div></footer>
 
 <script>
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
@@ -622,6 +653,98 @@ const PROJECTS = [
     brief: 'Apex Logistics needed a launch announcement that felt confident and established from day one, ahead of opening their Quetta branch for domestic and international freight services.',
     approach: 'An angular red banner cuts diagonally across the layout for energy and urgency, while the globe-and-arrow logo, tagline, and full contact details keep the flyer functional as both a teaser and a reference card.',
     services: ['Print Design', 'Launch Campaign']
+  },
+  {
+    id: 'webdesign-school',
+    title: 'Learn Academy — English Course Website',
+    category: 'Web Design',
+    year: '2026',
+    client: 'Concept Work',
+    image: 'images/webdesign-school.jpg',
+    alt: 'Learn Academy English course website design',
+    liveUrl: 'sites/learn-academy/index.html',
+    sub: 'A full, multi-section homepage for an English language school — courses, teachers, pricing, testimonials, and a CEFR level tracker built right into the hero.',
+    brief: 'A concept homepage for an English course provider, built to reassure a nervous first-time visitor that they can genuinely reach fluency, while making the path to get there feel concrete rather than vague, and to showcase the full range of pages a real school site needs.',
+    approach: 'A CEFR level bar sits right in the hero, turning an abstract promise ("you\u2019ll get fluent") into a visible, real progression from A1 to C2. Real classroom photography reinforces the small-group promise, while dedicated sections for teachers, student testimonials, and transparent pricing carry that trust all the way through to booking a free trial. A calm green-and-amber palette and a confident geometric typeface keep the tone encouraging rather than corporate.',
+    services: ['Web Design', 'UI Design']
+  },
+  {
+    id: 'webdesign-business',
+    title: 'Meridian — Consulting Firm Website',
+    category: 'Web Design',
+    year: '2026',
+    client: 'Concept Work',
+    image: 'images/webdesign-business.jpg',
+    alt: 'Meridian Consulting business website design',
+    sub: 'A dark, structured homepage design for a business strategy consultancy, built around a data-forward grid layout.',
+    brief: 'A concept homepage for a business strategy consultancy, aimed at communicating precision and trustworthiness to founders and executives making high-stakes decisions.',
+    approach: 'A near-black palette with a single gold accent and a hairline-grid layout borrows visual cues from financial reporting and architecture, both fields built on precision. A live-feeling data bar up top puts real numbers in front of the visitor before a single word of copy is read.',
+    services: ['Web Design', 'UI Design']
+  },
+  {
+    id: 'webdesign-coffee',
+    title: 'Ember & Ash — Coffee Shop Website',
+    category: 'Web Design',
+    year: '2026',
+    client: 'Concept Work',
+    image: 'images/webdesign-coffee.jpg',
+    alt: 'Ember and Ash coffee shop website design',
+    sub: 'A warm, dark-roast-toned homepage design for a specialty coffee roaster, with tasting-note cards for each bean.',
+    brief: 'A concept homepage for a small-batch coffee roaster, built to feel more like a specialty tasting room than a generic cafe site, for an audience that already knows the difference between a light and dark roast.',
+    approach: 'A deep espresso-brown palette with copper and turmeric accents mirrors the product itself, while wine-style tasting cards for each origin, complete with flavour notes and a roast-level scale, give the page real, specific content instead of stock "great coffee" copy.',
+    services: ['Web Design', 'UI Design']
+  },
+  {
+    id: 'graph-corporation',
+    title: 'Graph Corporation — Brand Identity',
+    category: 'Branding',
+    year: '2026',
+    client: 'Graph Corporation',
+    image: 'images/graph-corporation-branding.jpg',
+    alt: 'Graph Corporation brand identity design',
+    sub: 'A four-"G" logomark that doubles as a flower motif, built around a bold red identity and a full stationery rollout.',
+    brief: 'Graph Corporation needed a mark that felt distinct and memorable while staying tied to their own initial, something ownable rather than a generic monogram.',
+    approach: 'Four stylised "G" shapes interlock to form both a hidden flower and four small stars, standing for excellence, quality, innovation, and achievement. A confident red palette carries the identity across business cards, a storefront banner, and branded polo shirts.',
+    services: ['Logo Design', 'Brand Identity', 'Stationery Design']
+  },
+  {
+    id: 'skillzone',
+    title: 'Skill Zone — Digital Services Identity',
+    category: 'Branding',
+    year: '2026',
+    client: 'Skill Zone Digital Services',
+    image: 'images/skillzone-branding.jpg',
+    alt: 'Skill Zone Digital Services brand identity design',
+    sub: 'An S+Z monogram and full brand system for a digital services agency, from ID badges to lanyards.',
+    brief: 'Skill Zone needed an identity that could carry across a genuinely wide range of services, logo and branding, video editing, digital advertising, and web design, without feeling generic or scattered.',
+    approach: 'The S and Z initials interlock into a single ribbon-like mark, paired with a confident navy-and-teal palette. The system was built out across business cards, staff ID badges, and lanyards so the brand feels consistent the moment a client walks into the office.',
+    services: ['Logo Design', 'Brand Identity', 'Stationery Design']
+  },
+  {
+    id: 'gentlewear',
+    title: 'Gentle Wear — Fashion Brand Identity',
+    category: 'Branding',
+    year: '2026',
+    client: 'Gentle Wear',
+    image: 'images/gentlewear-branding.jpg',
+    alt: 'Gentle Wear brand identity design',
+    sub: 'A G+W diamond logomark balancing softness and structure for a menswear clothing brand.',
+    brief: 'Gentle Wear\u2019s name is a deliberate contrast, sharp tailoring with a gentle touch, and the brand identity needed to hold both ideas at once without feeling contradictory.',
+    approach: 'The G and W letterforms are built from clean diamond geometry, structured enough to read as "sharp" while an elegant serif wordmark and soft blue palette carry the "gentle" half of the story. The mark was carried through to business cards and exterior storefront signage.',
+    services: ['Logo Design', 'Brand Identity']
+  },
+  {
+    id: 'friendscafe',
+    title: 'Friends Cafe — Coffee Shop Identity',
+    category: 'Branding',
+    year: '2026',
+    client: 'Friends Cafe',
+    image: 'images/friendscafe-branding.jpg',
+    alt: 'Friends Cafe brand identity design',
+    sub: 'A warm, hand-drawn coffee cup logomark and full brand rollout for a Quetta cafe, from cards to menu photography.',
+    brief: 'Friends Cafe, based in Hazara Town, Quetta, wanted a warm, welcoming identity that felt hand-crafted rather than corporate, matching a cafe built around bringing people together.',
+    approach: 'A simple line-drawn coffee cup and bean mark keeps the logo warm and approachable, paired with a rich espresso-brown palette. The identity was rolled out across business cards and menu-style food photography layouts under the line "The Place Where Hearts Find Peace."',
+    services: ['Logo Design', 'Brand Identity', 'Menu Design']
   }
 ];
 
@@ -646,6 +769,21 @@ const PROJECTS = [
   document.getElementById('pdSub').textContent = project.sub;
   document.getElementById('pdImage').src = project.image;
   document.getElementById('pdImage').alt = project.alt;
+
+  if (project.liveUrl) {
+    document.getElementById('pdMediaWrap').style.display = 'none';
+    const liveWrap = document.getElementById('pdLiveWrap');
+    liveWrap.classList.add('active');
+    document.getElementById('pdLiveFrame').src = project.liveUrl;
+    document.getElementById('pdLiveBtn').href = project.liveUrl;
+    try {
+      const fullUrl = new URL(project.liveUrl, window.location.href);
+      document.getElementById('pdLiveUrl').textContent = fullUrl.hostname + fullUrl.pathname;
+    } catch (e) {
+      document.getElementById('pdLiveUrl').textContent = project.liveUrl;
+    }
+  }
+
   document.getElementById('pdBrief').textContent = project.brief;
   document.getElementById('pdApproach').textContent = project.approach;
   document.getElementById('pdClient').textContent = project.client;
